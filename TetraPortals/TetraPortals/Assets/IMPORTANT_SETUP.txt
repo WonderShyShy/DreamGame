@@ -1,0 +1,152 @@
+场景中需要手动添加RowGeneratorAnimator组件
+
+# 重要设置说明 - 请先阅读
+
+要使"从底部推入新行"功能正常工作，您需要确保以下步骤都完成：
+
+## 1. 添加RowGeneratorAnimator组件
+
+1. 打开场景 `Assets/Scenes/SampleScene.unity`
+2. 在Hierarchy面板中右键点击，选择 "Create Empty"
+3. 将新创建的游戏对象命名为 "RowGenerator"
+4. 选中该游戏对象，在Inspector面板中点击 "Add Component"
+5. 搜索并添加 "RowGeneratorAnimator" 组件
+
+## 2. 启用调试模式
+
+为了更容易诊断问题，您应该启用以下组件的调试模式：
+
+1. RowGeneratorAnimator - 勾选"Debug Mode"
+2. GridManager - 勾选"Debug Mode"
+
+## 3. 常见问题排查
+
+如果新行生成功能仍然不工作，请检查：
+
+1. 控制台日志中是否有错误信息
+2. 是否能在游戏运行中见到以下日志：
+   - "下落和消除完成，现在生成新行"
+   - "使用RowGeneratorAnimator生成新行: RowGenerator"
+   - "开始生成并推动新行动画"
+
+3. 正常流程应该是：
+   - 拖动方块触发TouchEnd()
+   - 调用TriggerDropsNextFrame()
+   - 执行GamePlayRoutine()
+   - 处理下落和消除
+   - 最后生成新行
+
+4. 可以直接测试新行生成功能：
+   - 在场景中选择"RowGenerator"对象
+   - 在运行模式下，在Inspector面板中找到RowGeneratorAnimator组件
+   - 点击"Debug(脚本)"按钮
+   - 调用"ForceGenerateRow()"方法
+
+## 4. 手动测试
+
+如果您想要立即测试新行生成功能，可以在场景中添加一个测试按钮：
+
+1. 创建一个UI按钮
+2. 添加一个新脚本TestGenerateRow.cs：
+   ```csharp
+   using UnityEngine;
+   using UnityEngine.UI;
+
+   public class TestGenerateRow : MonoBehaviour
+   {
+       private Button button;
+       private RowGeneratorAnimator rowGenerator;
+
+       void Start()
+       {
+           button = GetComponent<Button>();
+           rowGenerator = FindObjectOfType<RowGeneratorAnimator>();
+           
+           button.onClick.AddListener(TestGeneration);
+       }
+
+       void TestGeneration()
+       {
+           if (rowGenerator != null)
+           {
+               rowGenerator.ForceGenerateRow();
+           }
+           else
+           {
+               Debug.LogError("找不到RowGeneratorAnimator组件！");
+           }
+       }
+   }
+   ```
+3. 将此脚本附加到按钮上
+4. 运行游戏并点击按钮测试
+
+更多详细信息请参考 `Assets/C#/SetupInstruction.md`
+
+===== 游戏流程管理器设置指南 =====
+
+为了确保游戏逻辑正确执行（下落→消除→生成新行），请按照以下步骤设置：
+
+1. 添加GameFlowManager组件
+   - 在场景中创建新的空游戏对象，命名为"GameFlowManager"
+   - 将GameFlowManager.cs脚本添加到该对象
+   - 勾选"调试模式"以查看详细日志
+
+2. 确保所有相关组件都已存在
+   - GridManager（必需，处理游戏数据）
+   - DropAnimator（可选，处理下落动画）
+   - LineClearAnimator（可选，处理消除动画）
+   - RowGeneratorAnimator（可选，处理新行生成动画）
+   - TouchMoving1（必需，处理方块拖动）
+
+3. 游戏流程说明
+   当玩家拖动方块后，游戏会按照以下流程执行：
+   - 检查方块是否真的移动了位置（列号不同）
+   - 如果移动了，启动GameFlowManager处理游戏流程：
+     1. 执行下落检查并等待动画完成
+     2. 执行消除检查并等待动画完成
+     3. 如果有变化，重复步骤1和2，直到棋盘稳定
+     4. 生成新行并执行动画
+     5. 再次检查下落和消除，直到棋盘稳定
+
+4. 调试技巧
+   - 启用调试模式可以在控制台看到详细的游戏流程日志
+   - 如果看到"未找到GameFlowManager"警告，检查是否正确添加了组件
+   - 如果游戏流程不如预期，可以查看日志了解具体卡在哪一步
+
+===== 新行生成动画设置指南 =====
+
+为了使新行生成动画正常工作，请按照以下步骤设置：
+
+1. 添加RowGeneratorAnimator组件
+   - 在场景中创建新的空游戏对象，命名为"RowGenerator"
+   - 将RowGeneratorAnimator.cs脚本添加到该对象
+   - 保持默认设置：动画持续时间0.5秒，勾选"调试模式"
+
+2. 确保相关组件都已存在
+   - 场景中应已有GridManager（处理数据层）
+   - 已有DropAnimator和LineClearAnimator（处理下落和消除动画）
+   - 已有TouchMoving1（处理方块拖动）
+
+3. 测试和调试
+   - 启动游戏，拖动一个方块并观察
+   - 当方块放置后，应触发下落和消除过程
+   - 完成后会自动生成新行，方块将从屏幕底部(-1行)出现并推动所有方块向上移动
+   - 如果调试模式开启，控制台会显示相关日志
+
+4. 常见问题排查
+   - 如果新行生成但没有动画：检查RowGeneratorAnimator是否添加到场景
+   - 如果方块位置不正确：可能是数据层和表现层不同步，尝试在GridManager中开启调试模式
+   - 如果动画卡顿：可以调整RowGeneratorAnimator中的动画持续时间
+
+===== 工作原理说明 =====
+
+新行生成动画实现了以下流程：
+1. 当拖拽结束后，会触发下落和消除检查
+2. 完成后，会调用GridManager.GenerateNewRow()生成新行（数据层更新）
+3. TouchMoving1获取新生成的方块（0行）和现有方块（>0行）
+4. RowGeneratorAnimator将新方块初始位置设为-1行
+5. 执行动画，将所有方块平滑移动到其正确位置
+6. 完成后继续游戏逻辑
+
+这种实现保持了数据层和表现层的分离，提供了更好的视觉效果。
