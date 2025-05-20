@@ -10,7 +10,7 @@ public class DropAnimator : MonoBehaviour
 {
     [Header("动画设置")]
     [SerializeField] private float dropDuration = 0.3f; // 下落动画持续时间
-    [SerializeField] private float layerDelay = 0.08f; // 不同层之间的延迟时间
+    [SerializeField] private float layerDelay = 0.1f; // 不同层之间的延迟时间
     [SerializeField] private AnimationCurve dropCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // 下落动画曲线
 
     [Header("调试选项")]
@@ -95,7 +95,7 @@ public class DropAnimator : MonoBehaviour
     private IEnumerator AutoCheckDropsRoutine()
     {
         // 等待一段时间确保游戏完全初始化
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         while (autoCheckDrops)
         {
