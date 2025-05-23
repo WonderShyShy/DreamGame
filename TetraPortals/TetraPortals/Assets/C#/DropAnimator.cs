@@ -12,6 +12,8 @@ public class DropAnimator : MonoBehaviour
     [SerializeField] private float dropDuration = 0.3f; // 下落动画持续时间
     [SerializeField] private float layerDelay = 0.1f; // 不同层之间的延迟时间
     [SerializeField] private AnimationCurve dropCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // 下落动画曲线
+    [SerializeField] private float waveDelay = 0.05f; // 波浪效果延迟时间
+    [SerializeField] private float waveAmplitude = 0.1f; // 波浪效果幅度
 
     [Header("调试选项")]
     [SerializeField] private bool debugMode = true; // 是否开启调试日志
@@ -237,7 +239,7 @@ public class DropAnimator : MonoBehaviour
                 dropInfo[kvp.Key] = (kvp.Key.mRow, kvp.Value);
             }
 
-            // 按行分组方块（从高到低）
+            // 按行分组方块
             Dictionary<int, List<PiecesManager>> piecesByRow = new Dictionary<int, List<PiecesManager>>();
 
             foreach (var kvp in dropInfo)
@@ -252,64 +254,42 @@ public class DropAnimator : MonoBehaviour
                 piecesByRow[originalRow].Add(kvp.Key);
             }
 
-            // 从低到高处理每一行
+            // 从高到低处理每一行
             List<int> rows = new List<int>(piecesByRow.Keys);
-            rows.Sort(); // 升序排列
+            rows.Sort((a, b) => b.CompareTo(a)); // 从高到低排序
 
+            // 记录每行的下落状态
+            Dictionary<int, bool> rowStarted = new Dictionary<int, bool>();
             foreach (int row in rows)
             {
-                // 获取当前行的所有方块
-                List<PiecesManager> piecesInRow = piecesByRow[row];
+                rowStarted[row] = false;
+            }
 
-                if (debugMode)
+            // 创建所有行的动画协程
+            Dictionary<int, Coroutine> rowAnimations = new Dictionary<int, Coroutine>();
+
+            // 启动第一行的动画
+            if (rows.Count > 0)
+            {
+                int firstRow = rows[0];
+                rowStarted[firstRow] = true;
+                rowAnimations[firstRow] = StartCoroutine(AnimateRowDrop(firstRow, piecesByRow[firstRow], dropInfo, piecesByRow, rowStarted, rowAnimations));
+            }
+
+            // 等待所有行完成
+            while (true)
+            {
+                bool allComplete = true;
+                foreach (int row in rows)
                 {
-                    Debug.Log($"开始处理第{row}行，共{piecesInRow.Count}个方块");
-                }
-
-                // 更新网格数据
-                foreach (var piece in piecesInRow)
-                {
-                    int targetRow = dropInfo[piece].targetRow;
-
-                    // 创建可能的批量更新
-                    List<(int row, int col, int value)> updates = new List<(int row, int col, int value)>();
-
-                    // 清除原位置
-                    for (int c = piece.mCol; c < piece.mCol + piece.mCount; c++)
+                    if (!rowStarted[row])
                     {
-                        updates.Add((row, c, 0)); // 原位置设为0
+                        allComplete = false;
+                        break;
                     }
-
-                    // 更新到新位置
-                    for (int c = piece.mCol; c < piece.mCol + piece.mCount; c++)
-                    {
-                        updates.Add((targetRow, c, 1)); // 新位置设为1
-                    }
-
-                    // 批量更新网格数据
-                    gridManager.BatchUpdateCells(updates);
-
-                    // 更新方块数据
-                    piece.mRow = targetRow;
                 }
-
-                // 开始同时动画处理当前行的所有方块
-                List<Coroutine> animations = new List<Coroutine>();
-
-                foreach (var piece in piecesInRow)
-                {
-                    // 添加每个方块的动画
-                    animations.Add(StartCoroutine(AnimateSinglePieceDrop(piece, row, dropInfo[piece].targetRow)));
-                }
-
-                // 等待这一行的所有动画完成
-                foreach (var animation in animations)
-                {
-                    yield return animation;
-                }
-
-                // 在处理下一行之前添加延迟
-                yield return new WaitForSeconds(layerDelay);
+                if (allComplete) break;
+                yield return null;
             }
 
             // 所有下落完成
@@ -329,6 +309,77 @@ public class DropAnimator : MonoBehaviour
     }
 
     /// <summary>
+    /// 执行单行方块的下落动画
+    /// </summary>
+    private IEnumerator AnimateRowDrop(
+        int row, 
+        List<PiecesManager> pieces, 
+        Dictionary<PiecesManager, (int originalRow, int targetRow)> dropInfo,
+        Dictionary<int, List<PiecesManager>> piecesByRow,
+        Dictionary<int, bool> rowStarted,
+        Dictionary<int, Coroutine> rowAnimations)
+    {
+        if (debugMode)
+        {
+            Debug.Log($"开始处理第{row}行，共{pieces.Count}个方块");
+        }
+
+        // 更新网格数据
+        foreach (var piece in pieces)
+        {
+            int targetRow = dropInfo[piece].targetRow;
+
+            // 创建可能的批量更新
+            List<(int row, int col, int value)> updates = new List<(int row, int col, int value)>();
+
+            // 清除原位置
+            for (int c = piece.mCol; c < piece.mCol + piece.mCount; c++)
+            {
+                updates.Add((row, c, 0)); // 原位置设为0
+            }
+
+            // 更新到新位置
+            for (int c = piece.mCol; c < piece.mCol + piece.mCount; c++)
+            {
+                updates.Add((targetRow, c, 1)); // 新位置设为1
+            }
+
+            // 批量更新网格数据
+            gridManager.BatchUpdateCells(updates);
+
+            // 更新方块数据
+            piece.mRow = targetRow;
+        }
+
+        // 开始同时动画处理当前行的所有方块
+        List<Coroutine> animations = new List<Coroutine>();
+
+        foreach (var piece in pieces)
+        {
+            // 添加每个方块的动画
+            animations.Add(StartCoroutine(AnimateSinglePieceDrop(piece, row, dropInfo[piece].targetRow)));
+        }
+
+        // 等待这一行的所有动画完成
+        foreach (var animation in animations)
+        {
+            yield return animation;
+        }
+
+        // 查找下一行并启动其动画
+        int nextRow = row - 1;
+        if (nextRow >= 0 && piecesByRow.ContainsKey(nextRow) && !rowStarted[nextRow])
+        {
+            // 添加波浪延迟
+            yield return new WaitForSeconds(waveDelay);
+            
+            // 启动下一行的动画
+            rowStarted[nextRow] = true;
+            rowAnimations[nextRow] = StartCoroutine(AnimateRowDrop(nextRow, piecesByRow[nextRow], dropInfo, piecesByRow, rowStarted, rowAnimations));
+        }
+    }
+
+    /// <summary>
     /// 执行单个方块的下落动画
     /// </summary>
     private IEnumerator AnimateSinglePieceDrop(PiecesManager piece, int startRow, int targetRow)
@@ -344,16 +395,23 @@ public class DropAnimator : MonoBehaviour
         Vector3 targetPosition = PiecesManager.getPosition(targetRow, piece.mCol, gridManager.cellSize, gridManager.startOffset);
 
         float elapsed = 0f;
+        float distance = Vector3.Distance(startPosition, targetPosition);
+        float adjustedDuration = dropDuration * (1f + (distance / 10f)); // 根据距离调整动画时间
 
         // 执行下落动画
-        while (elapsed < dropDuration)
+        while (elapsed < adjustedDuration)
         {
             elapsed += Time.deltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsed / dropDuration);
+            float normalizedTime = Mathf.Clamp01(elapsed / adjustedDuration);
             float curveValue = dropCurve.Evaluate(normalizedTime);
 
+            // 添加波浪效果
+            float waveEffect = Mathf.Sin(normalizedTime * Mathf.PI * 2) * waveAmplitude;
+            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, curveValue);
+            currentPosition.y += waveEffect;
+
             // 更新位置
-            piece.transform.position = Vector3.Lerp(startPosition, targetPosition, curveValue);
+            piece.transform.position = currentPosition;
 
             yield return null;
         }
