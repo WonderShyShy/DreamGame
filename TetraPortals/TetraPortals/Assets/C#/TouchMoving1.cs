@@ -635,7 +635,7 @@ public class TouchMoving1 : MonoBehaviour
             
             // 设置精灵大小和位置，使用用户设置的宽度比例
             columnRenderer.transform.position = new Vector3(colX, columnY, 0);
-            columnRenderer.transform.localScale = new Vector3(gridManager.cellSize * columnWidthScale*110, columnHeight * columnHeightScale*100, 1);
+            columnRenderer.transform.localScale = new Vector3(gridManager.cellSize * columnWidthScale*105, columnHeight * columnHeightScale*100, 1);
             
             // 设置排序顺序，使用用户设置的值确保显示在正确层级
             columnRenderer.sortingOrder = effectSortingOrder;
@@ -643,8 +643,7 @@ public class TouchMoving1 : MonoBehaviour
         
         if (Debug.isDebugBuild)
         {
-            Debug.Log($"创建了拖动效果，宽度比例:{columnWidthScale}，高度比例:{columnHeightScale}，层级:{effectSortingOrder}");
-        }
+            Debug.Log($"创建了拖动效果，宽度比例:{columnWidthScale}，高度比例:{columnHeightScale}，层级:{effectSortingOrder}");        }
     }
     
     /// <summary>
