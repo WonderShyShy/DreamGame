@@ -128,7 +128,7 @@ public class PiecesManager : MonoBehaviour
         SetupOverlayPosition();
         
         // 设置渲染顺序，确保覆盖层在最上面
-        overlayRenderer.sortingOrder = 10;
+        overlayRenderer.sortingOrder = LayerConstants.BLOCK_THEMES;
     }
     
     /// <summary>
@@ -148,7 +148,7 @@ public class PiecesManager : MonoBehaviour
         overlayRenderer.transform.localScale = new Vector3(mCount, 1, 1);
         
         // 确保覆盖层在最前面
-        overlayRenderer.sortingOrder = 10;
+        overlayRenderer.sortingOrder = LayerConstants.BLOCK_THEMES;
     }
 
     /// <summary>

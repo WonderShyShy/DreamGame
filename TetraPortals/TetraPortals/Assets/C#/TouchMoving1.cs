@@ -37,9 +37,17 @@ public class TouchMoving1 : MonoBehaviour
     [SerializeField] private float dragEffectOffset = 0.05f; // 拖拽效果偏移量
     [SerializeField] private float columnWidthScale = 2f; // 列宽度比例，相对于格子宽度
     [SerializeField] private float columnHeightScale = 2f; // 列高度比例，相对于棋盘高度
-    [SerializeField] private int effectSortingOrder = 10; // 效果的排序顺序，确保显示在棋盘上方
+    [SerializeField] private int effectSortingOrder = LayerConstants.DRAG_EFFECTS; // 拖拽特效层级
     [SerializeField] private Color effectColor = new Color(0.3f, 0.7f, 1f, 0.6f); // 效果颜色 (仅作为备用颜色)
     [SerializeField] private bool useDynamicColors = true; // 是否使用动态主题颜色
+    
+    // 残影效果相关
+    [Header("残影效果设置")]
+    [SerializeField] private bool enableGhostEffect = true; // 是否启用残影效果
+    [SerializeField] private float ghostAlpha = 0.2f; // 残影透明度
+    [SerializeField] private float ghostSaturation = 0.5f; // 残影饱和度（0-1，越小越灰）
+    [SerializeField] private int ghostSortingOrder = LayerConstants.GHOST_EFFECT; // 残影层级
+    private GameObject ghostContainer; // 残影容器对象
     
     // 吸附效果相关
     [Header("吸附效果设置")]
@@ -172,6 +180,9 @@ public class TouchMoving1 : MonoBehaviour
         
         // 创建拖动效果
         CreateDragEffects();
+        
+        // 创建残影效果
+        CreateGhostEffect();
     }
 
     /// <summary>
@@ -353,6 +364,9 @@ public class TouchMoving1 : MonoBehaviour
         
         // 销毁拖动效果
         DestroyDragEffects();
+        
+        // 销毁残影效果
+        DestroyGhostEffect();
         
         // 重置速度和吸附状态
         dragSpeed = 0f;
@@ -730,6 +744,143 @@ public class TouchMoving1 : MonoBehaviour
         {
             Destroy(dragEffectContainer);
             dragEffectContainer = null;
+        }
+    }
+    
+    /// <summary>
+    /// 创建方块残影效果
+    /// </summary>
+    private void CreateGhostEffect()
+    {
+        // 如果未启用残影效果或没有当前拖拽方块，直接返回
+        if (!enableGhostEffect || currentDraggingPiece == null)
+            return;
+            
+        // 如果已存在残影，先销毁
+        DestroyGhostEffect();
+        
+        // 创建残影容器
+        ghostContainer = new GameObject("GhostEffect");
+        ghostContainer.transform.position = currentDraggingPiece.transform.position;
+        ghostContainer.transform.rotation = currentDraggingPiece.transform.rotation;
+        ghostContainer.transform.localScale = currentDraggingPiece.transform.localScale;
+        
+        // 根据方块类型创建对应的残影
+        if (currentDraggingPiece.useOverlay && currentDraggingPiece.overlayRenderer != null)
+        {
+            // 处理覆盖层模式的残影
+            CreateOverlayGhost();
+        }
+        else if (currentDraggingPiece.mCells != null && currentDraggingPiece.mCells.Count > 0)
+        {
+            // 处理多单元格模式的残影
+            CreateCellsGhost();
+        }
+        
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"创建了方块残影，透明度: {ghostAlpha}, 饱和度: {ghostSaturation}");
+        }
+    }
+    
+    /// <summary>
+    /// 创建覆盖层模式的残影
+    /// </summary>
+    private void CreateOverlayGhost()
+    {
+        // 创建覆盖层残影
+        GameObject overlayGhost = new GameObject("OverlayGhost");
+        overlayGhost.transform.SetParent(ghostContainer.transform);
+        overlayGhost.transform.localPosition = Vector3.zero;
+        overlayGhost.transform.localRotation = Quaternion.identity;
+        overlayGhost.transform.localScale = Vector3.one;
+        
+        SpriteRenderer ghostRenderer = overlayGhost.AddComponent<SpriteRenderer>();
+        SpriteRenderer originalRenderer = currentDraggingPiece.overlayRenderer;
+        
+        // 复制原始渲染器的属性
+        ghostRenderer.sprite = originalRenderer.sprite;
+        ghostRenderer.sortingOrder = ghostSortingOrder;
+        
+        // 应用残影颜色效果
+        Color ghostColor = ApplyGhostEffect(originalRenderer.color);
+        ghostRenderer.color = ghostColor;
+        
+        // 如果启用了隐藏基础单元格，也需要创建基础单元格的残影
+        if (currentDraggingPiece.hideBaseCells)
+        {
+            CreateCellsGhost();
+        }
+    }
+    
+    /// <summary>
+    /// 创建多单元格模式的残影
+    /// </summary>
+    private void CreateCellsGhost()
+    {
+        for (int i = 0; i < currentDraggingPiece.mCells.Count; i++)
+        {
+            SpriteRenderer originalCell = currentDraggingPiece.mCells[i];
+            if (originalCell == null) continue;
+            
+            // 创建单元格残影
+            GameObject cellGhost = new GameObject($"CellGhost_{i}");
+            cellGhost.transform.SetParent(ghostContainer.transform);
+            
+            // 设置相对位置（相对于方块的位置）
+            Vector3 relativePos = originalCell.transform.position - currentDraggingPiece.transform.position;
+            cellGhost.transform.localPosition = relativePos;
+            cellGhost.transform.localRotation = originalCell.transform.rotation;
+            cellGhost.transform.localScale = originalCell.transform.localScale;
+            
+            SpriteRenderer ghostRenderer = cellGhost.AddComponent<SpriteRenderer>();
+            
+            // 复制原始渲染器的属性
+            ghostRenderer.sprite = originalCell.sprite;
+            ghostRenderer.sortingOrder = ghostSortingOrder;
+            
+            // 应用残影颜色效果
+            Color ghostColor = ApplyGhostEffect(originalCell.color);
+            ghostRenderer.color = ghostColor;
+        }
+    }
+    
+    /// <summary>
+    /// 应用残影效果到颜色
+    /// </summary>
+    /// <param name="originalColor">原始颜色</param>
+    /// <returns>应用残影效果后的颜色</returns>
+    private Color ApplyGhostEffect(Color originalColor)
+    {
+        // 转换为HSV以调整饱和度
+        Color.RGBToHSV(originalColor, out float h, out float s, out float v);
+        
+        // 降低饱和度，让颜色更灰暗
+        s *= ghostSaturation;
+        
+        // 转换回RGB
+        Color desaturatedColor = Color.HSVToRGB(h, s, v);
+        
+        // 设置透明度
+        desaturatedColor.a = ghostAlpha;
+        
+        return desaturatedColor;
+    }
+    
+    /// <summary>
+    /// 销毁残影效果
+    /// </summary>
+    private void DestroyGhostEffect()
+    {
+        if (ghostContainer != null)
+        {
+            Destroy(ghostContainer);
+            ghostContainer = null;
+            
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log("销毁了方块残影");
+            }
         }
     }
 }
