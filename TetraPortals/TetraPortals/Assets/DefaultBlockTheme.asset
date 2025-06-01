@@ -15,4 +15,8 @@ MonoBehaviour:
   twoBlockSprite: {fileID: 21300000, guid: 30cabd7e81c0a476ba3389b4971494ff, type: 3}
   threeBlockSprite: {fileID: 21300000, guid: d5dd47bf496ee4a40ab794e886264d46, type: 3}
   fourBlockSprite: {fileID: 21300000, guid: 8cad47c616f344ef5985b6178d3cd678, type: 3}
+  oneBlockColor: {r: 0, g: 0.5, b: 1, a: 1}
+  twoBlockColor: {r: 0, g: 0.8, b: 0.2, a: 1}
+  threeBlockColor: {r: 1, g: 0.2, b: 0.2, a: 1}
+  fourBlockColor: {r: 1, g: 0.8, b: 0, a: 1}
   baseCellSize: 0.725 

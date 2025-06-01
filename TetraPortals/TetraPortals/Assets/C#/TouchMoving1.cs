@@ -38,7 +38,8 @@ public class TouchMoving1 : MonoBehaviour
     [SerializeField] private float columnWidthScale = 2f; // 列宽度比例，相对于格子宽度
     [SerializeField] private float columnHeightScale = 2f; // 列高度比例，相对于棋盘高度
     [SerializeField] private int effectSortingOrder = 10; // 效果的排序顺序，确保显示在棋盘上方
-    [SerializeField] private Color effectColor = new Color(0.3f, 0.7f, 1f, 0.6f); // 效果颜色
+    [SerializeField] private Color effectColor = new Color(0.3f, 0.7f, 1f, 0.6f); // 效果颜色 (仅作为备用颜色)
+    [SerializeField] private bool useDynamicColors = true; // 是否使用动态主题颜色
     
     // 吸附效果相关
     [Header("吸附效果设置")]
@@ -586,6 +587,9 @@ public class TouchMoving1 : MonoBehaviour
         int startCol = currentDraggingPiece.mCol;
         int endCol = startCol + currentDraggingPiece.mCount - 1;
         
+        // 获取动态特效颜色
+        Color dynamicColor = GetDragEffectColor();
+        
         // 为每一列创建整列效果
         for (int col = startCol; col <= endCol; col++)
         {
@@ -606,8 +610,8 @@ public class TouchMoving1 : MonoBehaviour
             // 创建一个纯色精灵
             Texture2D texture = new Texture2D(1, 1);
             
-            // 使用自定义颜色和透明度
-            Color finalColor = effectColor;
+            // 使用动态颜色和透明度
+            Color finalColor = dynamicColor;
             finalColor.a = dragEffectAlpha; // 应用透明度设置
             texture.SetPixel(0, 0, finalColor);
             
@@ -643,7 +647,46 @@ public class TouchMoving1 : MonoBehaviour
         
         if (Debug.isDebugBuild)
         {
-            Debug.Log($"创建了拖动效果，宽度比例:{columnWidthScale}，高度比例:{columnHeightScale}，层级:{effectSortingOrder}");        }
+            Debug.Log($"创建了拖动效果，使用{(useDynamicColors ? "动态主题" : "固定")}颜色，宽度比例:{columnWidthScale}，高度比例:{columnHeightScale}，层级:{effectSortingOrder}");
+        }
+    }
+    
+    /// <summary>
+    /// 获取拖拽特效的颜色
+    /// </summary>
+    /// <returns>拖拽特效使用的颜色</returns>
+    private Color GetDragEffectColor()
+    {
+        // 如果启用了动态颜色且存在当前拖拽方块
+        if (useDynamicColors && currentDraggingPiece != null)
+        {
+            // 尝试从ThemeManager获取主题颜色
+            ThemeManager themeManager = ThemeManager.Instance;
+            if (themeManager != null)
+            {
+                // 获取方块宽度对应的特效颜色
+                Color themeColor = themeManager.GetBlockEffectColor(currentDraggingPiece.mCount, dragEffectAlpha);
+                
+                if (Debug.isDebugBuild)
+                {
+                    Debug.Log($"使用{currentDraggingPiece.mCount}格方块的主题颜色: {themeColor}");
+                }
+                
+                return themeColor;
+            }
+            else if (Debug.isDebugBuild)
+            {
+                Debug.LogWarning("TouchMoving1: ThemeManager不可用，使用备用颜色");
+            }
+        }
+        
+        // 回退到固定颜色
+        if (Debug.isDebugBuild && useDynamicColors)
+        {
+            Debug.Log("TouchMoving1: 使用备用固定颜色");
+        }
+        
+        return effectColor;
     }
     
     /// <summary>

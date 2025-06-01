@@ -87,6 +87,44 @@ public class ThemeManager : MonoBehaviour
     }
     
     /// <summary>
+    /// 获取指定宽度方块的主题颜色
+    /// </summary>
+    /// <param name="blockWidth">方块宽度 (1-4)</param>
+    /// <returns>对应的主题颜色，如果获取失败则返回白色</returns>
+    public Color GetBlockColor(int blockWidth)
+    {
+        if (currentTheme != null)
+        {
+            return currentTheme.GetColorByWidth(blockWidth);
+        }
+        
+        if (debugMode)
+            Debug.LogWarning("ThemeManager: 当前主题为空，返回默认颜色");
+        
+        return Color.white; // 默认颜色
+    }
+    
+    /// <summary>
+    /// 获取指定宽度方块的特效颜色（带透明度）
+    /// </summary>
+    /// <param name="blockWidth">方块宽度 (1-4)</param>
+    /// <param name="alpha">透明度 (0-1)</param>
+    /// <returns>调整透明度后的特效颜色</returns>
+    public Color GetBlockEffectColor(int blockWidth, float alpha = 0.5f)
+    {
+        if (currentTheme != null)
+        {
+            return currentTheme.GetEffectColor(blockWidth, alpha);
+        }
+        
+        if (debugMode)
+            Debug.LogWarning("ThemeManager: 当前主题为空，返回默认特效颜色");
+        
+        // 返回默认的半透明白色
+        return new Color(1f, 1f, 1f, alpha);
+    }
+    
+    /// <summary>
     /// 批量更新现有所有方块的主题
     /// </summary>
     public void RefreshAllBlocks()

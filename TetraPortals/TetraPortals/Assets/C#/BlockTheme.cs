@@ -20,6 +20,19 @@ public class BlockTheme : ScriptableObject
     [Tooltip("4格宽方块贴图 (黄色长条)")]
     public Sprite fourBlockSprite;  // Yellow.png - 4x1 长条
     
+    [Header("方块颜色配置 - 用于特效")]
+    [Tooltip("1格方块的主题颜色 (蓝色)")]
+    public Color oneBlockColor = Color.blue;
+    
+    [Tooltip("2格方块的主题颜色 (绿色)")]
+    public Color twoBlockColor = Color.green;
+    
+    [Tooltip("3格方块的主题颜色 (红色)")]
+    public Color threeBlockColor = Color.red;
+    
+    [Tooltip("4格方块的主题颜色 (黄色)")]
+    public Color fourBlockColor = Color.yellow;
+    
     [Header("方块尺寸配置")]
     [Tooltip("单格的基础尺寸")]
     public float baseCellSize = 0.725f;
@@ -40,6 +53,25 @@ public class BlockTheme : ScriptableObject
             default: 
                 Debug.LogWarning($"无效的方块宽度: {width}，返回默认贴图");
                 return oneBlockSprite; // 默认返回蓝色
+        }
+    }
+    
+    /// <summary>
+    /// 根据方块宽度获取对应的主题颜色
+    /// </summary>
+    /// <param name="width">方块宽度 (1-4)</param>
+    /// <returns>对应的颜色，如果宽度无效则返回白色</returns>
+    public Color GetColorByWidth(int width)
+    {
+        switch(width)
+        {
+            case 1: return oneBlockColor;
+            case 2: return twoBlockColor; 
+            case 3: return threeBlockColor;
+            case 4: return fourBlockColor;
+            default: 
+                Debug.LogWarning($"无效的方块宽度: {width}，返回默认颜色");
+                return Color.white; // 默认返回白色
         }
     }
     
@@ -99,5 +131,18 @@ public class BlockTheme : ScriptableObject
     public string GetThemeInfo()
     {
         return $"拉长方块主题 - 基础尺寸: {baseCellSize}, 配置完整度: {(IsThemeComplete() ? "完整" : "不完整")}";
+    }
+    
+    /// <summary>
+    /// 获取用于特效的颜色（带透明度调整）
+    /// </summary>
+    /// <param name="width">方块宽度</param>
+    /// <param name="alpha">透明度 (0-1)</param>
+    /// <returns>调整透明度后的颜色</returns>
+    public Color GetEffectColor(int width, float alpha = 0.5f)
+    {
+        Color baseColor = GetColorByWidth(width);
+        baseColor.a = alpha;
+        return baseColor;
     }
 } 
