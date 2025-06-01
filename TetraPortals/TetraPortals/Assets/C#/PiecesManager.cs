@@ -4,28 +4,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 管理单个方块对象的属性和行为
-/// 负责创建、管理和显示方块的各个单元格
+/// 管理单个方块对象的属性和行为 - 覆盖式拉长版本
+/// 保持原有多单元格结构，添加拉长贴图覆盖层
 /// </summary>
 public class PiecesManager : MonoBehaviour
 {
+    [Header("方块数据")]
     public int mData;       // 方块数据，用二进制位表示方块形状（1=单格，3=两格，7=三格，15=四格）
     public int mCount;      // 方块宽度（占用的格子数量）
     public int mRow;        // 方块所在行
     public int mCol;        // 方块所在列（最左侧格子的列位置）
+    
+    [Header("渲染组件")]
     public List<SpriteRenderer> mCells = new List<SpriteRenderer>(); // 存储方块的所有单元格的精灵渲染器
-
-    //public void Start()
-    //{
-    //    CreateCells();
-    //}
+    public SpriteRenderer overlayRenderer; // 覆盖层渲染器（显示拉长贴图）
+    
+    [Header("覆盖层设置")]
+    [Tooltip("是否启用拉长贴图覆盖层")]
+    public bool useOverlay = true;
+    
+    [Tooltip("是否隐藏底层的小方块")]
+    public bool hideBaseCells = true;
 
     /// <summary>
     /// 组件初始化
     /// </summary>
     public void Start()
     {
-       //CreateCells();
+        // 保持原有逻辑
     }
 
     /// <summary>
@@ -80,17 +86,69 @@ public class PiecesManager : MonoBehaviour
                 cell = mCells[i];
             }
             
-            // *** 关键：应用主题贴图 ***
-            if (ThemeManager.Instance != null)
-            {
-                ThemeManager.Instance.ApplyTheme(cell, mCount);
-            }
-            
             // 获取单元格在方块内的相对位置
             var rc = GetRowColumn(cellId);
             // 设置单元格的位置（在本地坐标系中）
             cell.transform.localPosition = new Vector3(rc.Value * 0.725f, rc.Key * 0.725f);
+            
+            // 如果设置隐藏底层方块，则隐藏单元格
+            if (hideBaseCells && useOverlay)
+            {
+                cell.color = new Color(1, 1, 1, 0); // 设为透明，保持碰撞但不显示
+            }
         }
+        
+        // 创建并设置覆盖层
+        if (useOverlay)
+        {
+            CreateOverlay();
+        }
+    }
+    
+    /// <summary>
+    /// 创建拉长贴图覆盖层
+    /// </summary>
+    private void CreateOverlay()
+    {
+        // 如果覆盖层不存在，创建一个
+        if (overlayRenderer == null)
+        {
+            GameObject overlayObj = new GameObject("StretchOverlay");
+            overlayObj.transform.SetParent(transform);
+            overlayRenderer = overlayObj.AddComponent<SpriteRenderer>();
+        }
+        
+        // 应用拉长主题贴图
+        if (ThemeManager.Instance != null)
+        {
+            ThemeManager.Instance.ApplyTheme(overlayRenderer, mCount);
+        }
+        
+        // 设置覆盖层位置和尺寸
+        SetupOverlayPosition();
+        
+        // 设置渲染顺序，确保覆盖层在最上面
+        overlayRenderer.sortingOrder = 10;
+    }
+    
+    /// <summary>
+    /// 设置覆盖层的位置和尺寸
+    /// </summary>
+    private void SetupOverlayPosition()
+    {
+        if (overlayRenderer == null) return;
+        
+        // 计算覆盖层的中心位置
+        float centerOffsetX = (mCount - 1) * 0.725f * 0.5f;
+        
+        // 设置覆盖层位置（相对于方块中心）
+        overlayRenderer.transform.localPosition = new Vector3(centerOffsetX, 0, 0);
+        
+        // 设置覆盖层尺寸（拉伸到覆盖所有单元格）
+        overlayRenderer.transform.localScale = new Vector3(mCount, 1, 1);
+        
+        // 确保覆盖层在最前面
+        overlayRenderer.sortingOrder = 10;
     }
 
     /// <summary>
@@ -144,5 +202,50 @@ public class PiecesManager : MonoBehaviour
         int row = (int)(rowf);
         
         return new KeyValuePair<int, int>(row, col);
+    }
+    
+    /// <summary>
+    /// 刷新方块的主题（用于运行时主题切换）
+    /// </summary>
+    public void RefreshTheme()
+    {
+        if (useOverlay && overlayRenderer != null && ThemeManager.Instance != null)
+        {
+            ThemeManager.Instance.ApplyTheme(overlayRenderer, mCount);
+        }
+    }
+    
+    /// <summary>
+    /// 切换覆盖层显示模式
+    /// </summary>
+    /// <param name="enabled">是否启用覆盖层</param>
+    public void SetOverlayEnabled(bool enabled)
+    {
+        useOverlay = enabled;
+        
+        if (overlayRenderer != null)
+        {
+            overlayRenderer.gameObject.SetActive(enabled);
+        }
+        
+        // 根据覆盖层状态调整底层方块的可见性
+        foreach (var cell in mCells)
+        {
+            if (cell != null)
+            {
+                cell.color = (enabled && hideBaseCells) ? 
+                    new Color(1, 1, 1, 0) : // 透明
+                    new Color(1, 1, 1, 1);  // 不透明
+            }
+        }
+    }
+    
+    /// <summary>
+    /// 获取方块信息的字符串描述
+    /// </summary>
+    /// <returns>方块的详细信息</returns>
+    public override string ToString()
+    {
+        return $"覆盖式方块: 位置({mRow},{mCol}), 宽度{mCount}, 覆盖层{(useOverlay ? "启用" : "禁用")}";
     }
 }

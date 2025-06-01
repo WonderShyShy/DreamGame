@@ -295,7 +295,7 @@ public class GridManager : MonoBehaviour
             1
         );
         
-        // 创建方块单元格
+        // *** 使用覆盖层方案：恢复原有的CreateCells方法 ***
         pieceManager.CreateCells(row, col, pieceType);
 
         // 在二维数组中标记该区域已被占用
@@ -305,8 +305,13 @@ public class GridManager : MonoBehaviour
         }
         
         // 存储方块信息
-        pieceManager.name = $"Piece_{row}_{col}_{pieceType}";
+        pieceManager.name = $"OverlayPiece_{row}_{col}_{pieceType}";
         spawnedPieces.Add(pieceManager);
+        
+        if (debugMode)
+        {
+            Debug.Log($"创建覆盖式方块: {pieceManager.ToString()}");
+        }
         
         return pieceManager;
     }

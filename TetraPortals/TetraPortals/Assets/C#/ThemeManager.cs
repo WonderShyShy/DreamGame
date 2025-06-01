@@ -114,18 +114,42 @@ public class ThemeManager : MonoBehaviour
     /// <returns>是否成功刷新</returns>
     private bool RefreshPieceTheme(PiecesManager piece)
     {
-        if (piece == null || piece.mCells == null)
+        if (piece == null)
             return false;
         
-        foreach(var cell in piece.mCells)
+        if (piece.useOverlay && piece.overlayRenderer != null)
         {
-            if (cell != null)
-            {
-                ApplyTheme(cell, piece.mCount);
-            }
+            // 刷新覆盖层的主题
+            ApplyTheme(piece.overlayRenderer, piece.mCount);
+            
+            if (debugMode)
+                Debug.Log($"刷新覆盖层主题: {piece.ToString()}");
+            
+            return true;
         }
-        
-        return true;
+        else if (piece.mCells != null && piece.mCells.Count > 0)
+        {
+            // 如果没有覆盖层，刷新底层单元格主题
+            foreach(var cell in piece.mCells)
+            {
+                if (cell != null)
+                {
+                    ApplyTheme(cell, piece.mCount);
+                }
+            }
+            
+            if (debugMode)
+                Debug.Log($"刷新底层单元格主题: {piece.ToString()}");
+            
+            return true;
+        }
+        else
+        {
+            if (debugMode)
+                Debug.LogWarning($"方块 {piece.name} 没有可用的渲染器组件");
+            
+            return false;
+        }
     }
     
     /// <summary>
