@@ -33,7 +33,7 @@ public class TouchMoving1 : MonoBehaviour
     // 拖动效果相关
     private GameObject dragEffectContainer;  // 拖拽效果容器
     [Header("拖动效果设置")]
-    [SerializeField] private float dragEffectAlpha = 0.6f;  // 拖拽效果透明度
+    [SerializeField] private float dragEffectAlpha = 0.3f;  // 拖拽效果透明度（调整为更淡）
     [SerializeField] private float dragEffectOffset = 0.05f; // 拖拽效果偏移量
     [SerializeField] private float columnWidthScale = 2f; // 列宽度比例，相对于格子宽度
     [SerializeField] private float columnHeightScale = 2f; // 列高度比例，相对于棋盘高度
@@ -639,7 +639,7 @@ public class TouchMoving1 : MonoBehaviour
             
             // 设置精灵大小和位置，使用用户设置的宽度比例
             columnRenderer.transform.position = new Vector3(colX, columnY, 0);
-            columnRenderer.transform.localScale = new Vector3(gridManager.cellSize * columnWidthScale*110, columnHeight * columnHeightScale*100, 1);
+            columnRenderer.transform.localScale = new Vector3(gridManager.cellSize * columnWidthScale*111f, columnHeight * columnHeightScale*100, 1);
             
             // 设置排序顺序，使用用户设置的值确保显示在正确层级
             columnRenderer.sortingOrder = effectSortingOrder;
