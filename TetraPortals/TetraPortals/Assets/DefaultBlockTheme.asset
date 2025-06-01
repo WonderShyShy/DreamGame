@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed4903f1da487e4292a706b8ef11c7f, type: 3}
+  m_Name: DefaultBlockTheme
+  oneBlockSprite: {fileID: 21300000, guid: cce296fb9dfeb4f03bda306f31160e43, type: 3}
+  twoBlockSprite: {fileID: 21300000, guid: 30cabd7e81c0a476ba3389b4971494ff, type: 3}
+  threeBlockSprite: {fileID: 21300000, guid: d5dd47bf496ee4a40ab794e886264d46, type: 3}
+  fourBlockSprite: {fileID: 21300000, guid: 8cad47c616f344ef5985b6178d3cd678, type: 3} 

@@ -80,6 +80,12 @@ public class PiecesManager : MonoBehaviour
                 cell = mCells[i];
             }
             
+            // *** 关键：应用主题贴图 ***
+            if (ThemeManager.Instance != null)
+            {
+                ThemeManager.Instance.ApplyTheme(cell, mCount);
+            }
+            
             // 获取单元格在方块内的相对位置
             var rc = GetRowColumn(cellId);
             // 设置单元格的位置（在本地坐标系中）
