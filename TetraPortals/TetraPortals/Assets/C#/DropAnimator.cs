@@ -258,38 +258,19 @@ public class DropAnimator : MonoBehaviour
             List<int> rows = new List<int>(piecesByRow.Keys);
             rows.Sort((a, b) => b.CompareTo(a)); // 从高到低排序
 
-            // 记录每行的下落状态
-            Dictionary<int, bool> rowStarted = new Dictionary<int, bool>();
+            // 🚀 修改：同时启动所有行的动画，而不是链式触发
+            List<Coroutine> allRowAnimations = new List<Coroutine>();
+            
             foreach (int row in rows)
             {
-                rowStarted[row] = false;
+                // 同时启动每一行的动画
+                allRowAnimations.Add(StartCoroutine(AnimateRowDrop(row, piecesByRow[row], dropInfo)));
             }
 
-            // 创建所有行的动画协程
-            Dictionary<int, Coroutine> rowAnimations = new Dictionary<int, Coroutine>();
-
-            // 启动第一行的动画
-            if (rows.Count > 0)
+            // 等待所有行的动画完成
+            foreach (var animation in allRowAnimations)
             {
-                int firstRow = rows[0];
-                rowStarted[firstRow] = true;
-                rowAnimations[firstRow] = StartCoroutine(AnimateRowDrop(firstRow, piecesByRow[firstRow], dropInfo, piecesByRow, rowStarted, rowAnimations));
-            }
-
-            // 等待所有行完成
-            while (true)
-            {
-                bool allComplete = true;
-                foreach (int row in rows)
-                {
-                    if (!rowStarted[row])
-                    {
-                        allComplete = false;
-                        break;
-                    }
-                }
-                if (allComplete) break;
-                yield return null;
+                yield return animation;
             }
 
             // 所有下落完成
@@ -314,10 +295,7 @@ public class DropAnimator : MonoBehaviour
     private IEnumerator AnimateRowDrop(
         int row, 
         List<PiecesManager> pieces, 
-        Dictionary<PiecesManager, (int originalRow, int targetRow)> dropInfo,
-        Dictionary<int, List<PiecesManager>> piecesByRow,
-        Dictionary<int, bool> rowStarted,
-        Dictionary<int, Coroutine> rowAnimations)
+        Dictionary<PiecesManager, (int originalRow, int targetRow)> dropInfo)
     {
         if (debugMode)
         {
@@ -366,17 +344,8 @@ public class DropAnimator : MonoBehaviour
             yield return animation;
         }
 
-        // 查找下一行并启动其动画
-        int nextRow = row - 1;
-        if (nextRow >= 0 && piecesByRow.ContainsKey(nextRow) && !rowStarted[nextRow])
-        {
-            // 添加波浪延迟
-            yield return new WaitForSeconds(waveDelay);
-            
-            // 启动下一行的动画
-            rowStarted[nextRow] = true;
-            rowAnimations[nextRow] = StartCoroutine(AnimateRowDrop(nextRow, piecesByRow[nextRow], dropInfo, piecesByRow, rowStarted, rowAnimations));
-        }
+        // 🚀 移除：不再启动下一行动画，因为所有行都已经同时启动了
+        // 原来的链式触发逻辑已被注释掉
     }
 
     /// <summary>
@@ -405,10 +374,11 @@ public class DropAnimator : MonoBehaviour
             float normalizedTime = Mathf.Clamp01(elapsed / adjustedDuration);
             float curveValue = dropCurve.Evaluate(normalizedTime);
 
-            // 添加波浪效果
-            float waveEffect = Mathf.Sin(normalizedTime * Mathf.PI * 2) * waveAmplitude;
+            // 🚀 移除波浪效果，让下落更加直接流畅
             Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, curveValue);
-            currentPosition.y += waveEffect;
+            // 原来的波浪效果已被移除：
+            // float waveEffect = Mathf.Sin(normalizedTime * Mathf.PI * 2) * waveAmplitude;
+            // currentPosition.y += waveEffect;
 
             // 更新位置
             piece.transform.position = currentPosition;
