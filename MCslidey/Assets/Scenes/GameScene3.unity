@@ -1988,29 +1988,29 @@ MonoBehaviour:
   clearBlockEffStoneBig: {fileID: 0}
   clearBlockEffStoneLittle: {fileID: 0}
   clearBlockEffSpriteFramesYuan:
-  - {fileID: 2800000, guid: 3d925ce35a5b9424987b98b1b5b11b02, type: 3}
-  - {fileID: 2800000, guid: f79417d35dedb443c945fce3ffb47540, type: 3}
-  - {fileID: 2800000, guid: d2f85e8060dc3453c88664e47555b589, type: 3}
-  - {fileID: 2800000, guid: e6ec5d83682ae4d7490cabbc33dd12b7, type: 3}
-  - {fileID: 2800000, guid: a2e4ab740c62e49e9a465966dbd5356f, type: 3}
+  - {fileID: 2800000, guid: f14ab5edf52f9b7479abed1c5323763b, type: 3}
+  - {fileID: 2800000, guid: bb11ee0ca58dfee49987007e3e88ddc9, type: 3}
+  - {fileID: 2800000, guid: 83da507cbd4e4ac41a9d423359da5d6a, type: 3}
+  - {fileID: 2800000, guid: 47d10a82a192dcc4e815f0cb4d8b5878, type: 3}
+  - {fileID: 2800000, guid: 9a9847b8b7a7093409e9208643cfa833, type: 3}
   clearBlockEffSpriteFramesShu:
-  - {fileID: 2800000, guid: 96feec7abf1c54b7daa6745c493b5961, type: 3}
-  - {fileID: 2800000, guid: 1dcd1acb526ea45ad8d09065687e61c2, type: 3}
-  - {fileID: 2800000, guid: 7887a887ce0dd45e587ebfb490094df1, type: 3}
-  - {fileID: 2800000, guid: 669a10cab422745ffb528997309e6e00, type: 3}
-  - {fileID: 2800000, guid: b81dc2a1b75fe4b48a82fc43b163fa80, type: 3}
+  - {fileID: 2800000, guid: f14ab5edf52f9b7479abed1c5323763b, type: 3}
+  - {fileID: 2800000, guid: bb11ee0ca58dfee49987007e3e88ddc9, type: 3}
+  - {fileID: 2800000, guid: 3f51b07947ea33943b490d830c1b58ff, type: 3}
+  - {fileID: 2800000, guid: 47d10a82a192dcc4e815f0cb4d8b5878, type: 3}
+  - {fileID: 2800000, guid: 9a9847b8b7a7093409e9208643cfa833, type: 3}
   clearBlockEffSpriteFramesStar:
-  - {fileID: 2800000, guid: b4fd07fdff1a242d48dc8470612f6f00, type: 3}
-  - {fileID: 2800000, guid: f763275de1c8042ceac762b6bb720295, type: 3}
-  - {fileID: 2800000, guid: 54904ccf232194976b2d7773765d236d, type: 3}
-  - {fileID: 2800000, guid: bde8102aefd5d4633beab2d005ba5e90, type: 3}
-  - {fileID: 2800000, guid: 4b823914cef5e48cca7c12c30565e7cf, type: 3}
+  - {fileID: 2800000, guid: f14ab5edf52f9b7479abed1c5323763b, type: 3}
+  - {fileID: 2800000, guid: bb11ee0ca58dfee49987007e3e88ddc9, type: 3}
+  - {fileID: 2800000, guid: 3f51b07947ea33943b490d830c1b58ff, type: 3}
+  - {fileID: 2800000, guid: 47d10a82a192dcc4e815f0cb4d8b5878, type: 3}
+  - {fileID: 2800000, guid: 9a9847b8b7a7093409e9208643cfa833, type: 3}
   clearBlockEffSpriteFramesFour:
-  - {fileID: 2800000, guid: a85f0f43066bd41e7950d59b305ec07a, type: 3}
-  - {fileID: 2800000, guid: 8316c8efb149b4d179970300d81ff314, type: 3}
-  - {fileID: 2800000, guid: b8d56bb80638247caaad84799b5cb565, type: 3}
-  - {fileID: 2800000, guid: 339a80466840d4423b0fdfc3cd4eb294, type: 3}
-  - {fileID: 2800000, guid: 0c9fab358a4284c05bbfe98ec0630a58, type: 3}
+  - {fileID: 2800000, guid: f14ab5edf52f9b7479abed1c5323763b, type: 3}
+  - {fileID: 2800000, guid: bb11ee0ca58dfee49987007e3e88ddc9, type: 3}
+  - {fileID: 2800000, guid: 83da507cbd4e4ac41a9d423359da5d6a, type: 3}
+  - {fileID: 2800000, guid: 47d10a82a192dcc4e815f0cb4d8b5878, type: 3}
+  - {fileID: 2800000, guid: 9a9847b8b7a7093409e9208643cfa833, type: 3}
   newBestEff: {fileID: 0}
   topUI: {fileID: 1350142732}
   blockGroupBg: {fileID: 1658887927}
