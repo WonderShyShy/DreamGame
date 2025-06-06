@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
+#if MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+using Lofelt.NiceVibrations;
+#endif
 
 // 添加简化版GameProcessController，避免外部依赖
 public static class GameProcessController
@@ -67,6 +70,15 @@ public class TouchMoving1 : MonoBehaviour
     private int snappedColumn = -1;    // 当前吸附的列
     private int dragDirection = 0;     // 拖动方向 (-1左, 1右)
     
+    [Header("震动反馈设置")]
+    [SerializeField] private bool enableColumnCrossVibration = true; // 是否启用经过格子震动
+    [SerializeField] private bool enableLineClearVibration = true; // 是否启用消除震动
+    [SerializeField] private float vibrationCooldown = 0.15f; // 震动冷却时间，防止过于频繁
+
+    // 震动相关私有变量
+    private int lastDragCol = -1;    // 上次拖动时的列位置
+    private float lastVibrationTime = 0f; // 上次震动的时间
+    
     /// <summary>
     /// 初始化组件，获取必要的引用
     /// </summary>
@@ -82,11 +94,39 @@ public class TouchMoving1 : MonoBehaviour
             Debug.LogError("场景中没有GridManager组件！");
         }
         
+        // 🎮 订阅消除动画完成事件，用于震动反馈
+        LineClearAnimator lineClearAnimator = FindObjectOfType<LineClearAnimator>();
+        if (lineClearAnimator != null && enableLineClearVibration)
+        {
+            lineClearAnimator.OnClearAnimationComplete += OnLineClearComplete;
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log("已订阅消除动画完成事件，将在消除时触发震动");
+            }
+        }
+        else if (enableLineClearVibration && Debug.isDebugBuild)
+        {
+            Debug.LogWarning("未找到LineClearAnimator组件，无法启用消除震动");
+        }
+        
         // 初始化速度检测变量
         lastPosition = Vector2.zero;
         lastPositionTime = 0f;
         currentVelocity = Vector2.zero;
         dragSpeed = 0f;
+    }
+    
+    /// <summary>
+    /// 组件销毁时清理事件订阅
+    /// </summary>
+    void OnDestroy()
+    {
+        // 🎮 取消消除动画完成事件订阅
+        LineClearAnimator lineClearAnimator = FindObjectOfType<LineClearAnimator>();
+        if (lineClearAnimator != null)
+        {
+            lineClearAnimator.OnClearAnimationComplete -= OnLineClearComplete;
+        }
     }
     
     /// <summary>
@@ -173,9 +213,15 @@ public class TouchMoving1 : MonoBehaviour
         // 保存X坐标移动范围限制
         limitposx = new KeyValuePair<float, float>(minx, maxx);
         
+        // 初始化震动检测
+        float currentX = currentDraggingPiece.transform.position.x;
+        lastDragCol = CalculateCurrentColumn(currentX);
+        lastVibrationTime = 0f;
+        
         if (Debug.isDebugBuild)
         {
             Debug.Log($"方块宽度: {currentDraggingPiece.mCount}, 可移动列范围: {limitcol.Key}~{limitcol.Value}, X坐标范围: {minx}~{maxx}");
+            Debug.Log($"开始拖动，初始列: {lastDragCol}");
         }
         
         // 创建拖动效果
@@ -227,6 +273,9 @@ public class TouchMoving1 : MonoBehaviour
         {
             newx = limitposx.Value; // 限制在最右边界
         }
+        
+        // 🎮 检测经过格子并触发震动
+        CheckColumnCrossAndVibrate(newx);
         
         // 处理慢速拖动的吸附效果
         if (enableSnapEffect && dragSpeed < slowDragThreshold)
@@ -373,6 +422,10 @@ public class TouchMoving1 : MonoBehaviour
         isSnapped = false;
         snappedColumn = -1;
         
+        // 重置震动检测状态
+        lastDragCol = -1;
+        lastVibrationTime = 0f;
+        
         // 只有当方块真的移动了位置时，才触发后续处理
         if (hasMoved)
         {
@@ -388,15 +441,15 @@ public class TouchMoving1 : MonoBehaviour
                 // 向下兼容：如果没有GameFlowManager，使用原有方法
                 if (Debug.isDebugBuild)
                 {
-                    Debug.LogWarning("未找到GameFlowManager，回退到原有的TriggerDropsNextFrame");
+                    Debug.Log("使用向下兼容方式触发下落检查");
                 }
                 StartCoroutine(TriggerDropsNextFrame());
             }
         }
-        else if (Debug.isDebugBuild)
-        {
-            Debug.Log("方块未移动，不触发下落和生成新行");
-        }
+        
+        // 重置拖动状态
+        isDragging = false;
+        currentDraggingPiece = null;
     }
     
     /// <summary>
@@ -881,6 +934,146 @@ public class TouchMoving1 : MonoBehaviour
             {
                 Debug.Log("销毁了方块残影");
             }
+        }
+    }
+
+    /// <summary>
+    /// 🎮 检测列跨越并触发震动
+    /// </summary>
+    /// <param name="currentX">当前X坐标</param>
+    private void CheckColumnCrossAndVibrate(float currentX)
+    {
+        if (!enableColumnCrossVibration) return;
+        
+        // 计算当前X坐标对应的列
+        int currentCol = CalculateCurrentColumn(currentX);
+        
+        // 检查是否跨越了格子边界
+        if (currentCol != lastDragCol && lastDragCol != -1)
+        {
+            // 检查冷却时间，防止震动过于频繁
+            float currentTime = Time.time;
+            if (currentTime - lastVibrationTime >= vibrationCooldown)
+            {
+                TriggerColumnCrossVibration();
+                lastVibrationTime = currentTime;
+                
+                if (Debug.isDebugBuild)
+                {
+                    Debug.Log($"🎮 跨越格子震动: 从列 {lastDragCol} 到列 {currentCol}");
+                }
+            }
+        }
+        
+        lastDragCol = currentCol;
+    }
+
+    /// <summary>
+    /// 🎮 计算X坐标对应的列号
+    /// </summary>
+    /// <param name="worldX">世界坐标X</param>
+    /// <returns>对应的列号</returns>
+    private int CalculateCurrentColumn(float worldX)
+    {
+        // 计算相对于网格起始位置的X偏移
+        float relativeX = worldX - gridManager.startOffset.x;
+        
+        // 转换为列号（四舍五入）
+        int col = Mathf.RoundToInt(relativeX / gridManager.cellSize);
+        
+        // 确保在有效范围内
+        col = Mathf.Clamp(col, 0, gridManager.columns - 1);
+        
+        return col;
+    }
+
+    /// <summary>
+    /// 🎮 触发列跨越震动
+    /// </summary>
+    private void TriggerColumnCrossVibration()
+    {
+        #if MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+        // 使用Feel插件的最轻微震动
+        if (HapticController.hapticsEnabled)
+        {
+            // 使用更轻微的 Emphasis 震动，amplitude 设置为很小的值
+            HapticPatterns.PlayEmphasis(0.3f, 0.3f); // 很轻的强度和频率
+        }
+        #elif UNITY_ANDROID || UNITY_IOS
+        // 备用方案：使用系统震动（已经是最短的单次震动）
+        Handheld.Vibrate();
+        #endif
+        
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("🎮 触发格子跨越震动（轻微）");
+        }
+    }
+
+    /// <summary>
+    /// 🎮 消除动画完成时的震动反馈
+    /// </summary>
+    /// <param name="clearedRows">被消除的行列表</param>
+    private void OnLineClearComplete(List<int> clearedRows)
+    {
+        if (!enableLineClearVibration || clearedRows == null || clearedRows.Count == 0)
+            return;
+
+        // 根据消除行数触发不同强度的震动
+        TriggerLineClearVibration(clearedRows.Count);
+
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"🎮 消除震动：消除了{clearedRows.Count}行");
+        }
+    }
+
+    /// <summary>
+    /// 🎮 触发消除震动，根据消除行数调整强度
+    /// </summary>
+    /// <param name="clearedLineCount">消除的行数</param>
+    private void TriggerLineClearVibration(int clearedLineCount)
+    {
+        #if MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+        if (HapticController.hapticsEnabled)
+        {
+            // 根据消除行数选择不同的震动效果
+            switch (clearedLineCount)
+            {
+                case 1:
+                    // 单行消除：轻微震动
+                    HapticPatterns.PlayEmphasis(0.5f, 0.4f);
+                    break;
+                case 2:
+                    // 双行消除：中等震动
+                    HapticPatterns.PlayEmphasis(0.7f, 0.6f);
+                    break;
+                case 3:
+                    // 三行消除：较强震动
+                    HapticPatterns.PlayEmphasis(0.9f, 0.8f);
+                    break;
+                default:
+                    // 四行及以上：最强震动
+                    HapticPatterns.PlayPreset(HapticPatterns.PresetType.MediumImpact);
+                    break;
+            }
+        }
+        #elif UNITY_ANDROID || UNITY_IOS
+        // 备用方案：系统震动，消除行数越多震动次数越多
+        for (int i = 0; i < Mathf.Min(clearedLineCount, 3); i++)
+        {
+            Handheld.Vibrate();
+            if (i < clearedLineCount - 1)
+            {
+                // 短暂间隔
+                System.Threading.Thread.Sleep(50);
+            }
+        }
+        #endif
+        
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"🎮 触发消除震动：{clearedLineCount}行");
         }
     }
 }

@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916f75d8d9f5f4d359178ec98bfe01ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropDuration: 0.35
-  layerDelay: 0.1
+  dropDuration: 0.3
+  layerDelay: 1
   dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -330,8 +330,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  waveDelay: 0.05
-  waveAmplitude: 0.1
+  waveDelay: 0
+  waveAmplitude: 0
   debugMode: 0
   autoCheckDrops: 1
   autoCheckInterval: 0.5
