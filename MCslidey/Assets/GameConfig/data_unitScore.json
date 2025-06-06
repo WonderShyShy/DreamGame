@@ -1,0 +1,10 @@
+{
+	"data":[
+		{"id" : 1, "score_min" : 0, "score_unit" : 1},
+		{"id" : 2, "score_min" : 80, "score_unit" : 4},
+		{"id" : 3, "score_min" : 500, "score_unit" : 9},
+		{"id" : 4, "score_min" : 1000, "score_unit" : 16},
+		{"id" : 5, "score_min" : 2000, "score_unit" : 25},
+		{"id" : 6, "score_min" : 5000, "score_unit" : 36}
+	]
+}

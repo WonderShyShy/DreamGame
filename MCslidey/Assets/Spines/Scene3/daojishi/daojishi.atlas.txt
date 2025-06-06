@@ -1,0 +1,97 @@
+
+daojishi.png
+size: 4096,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+0
+  rotate: false
+  xy: 941, 444
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+0_1
+  rotate: false
+  xy: 2, 1356
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 1880, 965
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+1_1
+  rotate: false
+  xy: 2, 835
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 2819, 1486
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+2_2
+  rotate: false
+  xy: 941, 1356
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 1353, 444
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+3_3
+  rotate: false
+  xy: 2, 314
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 2292, 965
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+4_4
+  rotate: false
+  xy: 941, 835
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 3231, 1486
+  size: 410, 389
+  orig: 410, 389
+  offset: 0, 0
+  index: -1
+5_5
+  rotate: false
+  xy: 1880, 1356
+  size: 937, 519
+  orig: 937, 519
+  offset: 0, 0
+  index: -1
+light
+  rotate: false
+  xy: 2, 2
+  size: 708, 310
+  orig: 708, 310
+  offset: 0, 0
+  index: -1

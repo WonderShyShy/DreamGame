@@ -1,0 +1,6 @@
+{
+	"data":[
+		{"id" : 1, "combo_num" : 1, "rate_die" : 100, "rate_notDie" : 100},
+		{"id" : 2, "combo_num" : 2, "rate_die" : 20, "rate_notDie" : 5}
+	]
+}

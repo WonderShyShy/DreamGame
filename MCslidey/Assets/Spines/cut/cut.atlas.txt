@@ -1,0 +1,55 @@
+
+cut.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ddk1
+  rotate: false
+  xy: 215, 233
+  size: 138, 138
+  orig: 138, 138
+  offset: 0, 0
+  index: -1
+xk1
+  rotate: false
+  xy: 257, 373
+  size: 28, 68
+  orig: 28, 68
+  offset: 0, 0
+  index: -1
+xk2
+  rotate: false
+  xy: 215, 373
+  size: 40, 80
+  orig: 40, 80
+  offset: 0, 0
+  index: -1
+xk3
+  rotate: false
+  xy: 57, 447
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fkd
+  rotate: false
+  xy: 1, 1
+  size: 230, 230
+  orig: 240, 240
+  offset: 5, 5
+  index: -1
+D_Glow_01B
+  rotate: false
+  xy: 1, 233
+  size: 212, 212
+  orig: 256, 256
+  offset: 22, 22
+  index: -1
+biao
+  rotate: false
+  xy: 1, 447
+  size: 54, 54
+  orig: 54, 54
+  offset: 0, 0
+  index: -1

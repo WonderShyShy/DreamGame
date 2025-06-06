@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: f4f5aacd00eb248dd85b044d2943ea23, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 87c3bf319196144748de98fd0360d9d4: 21300000
+    - 7d8063b4cc2044ad39f2363c5b94c1fe: 21300000
+    - 9035bc060efa342a59b196f190c8a5e0: 21300000
+    - 68ee5c1711ff1483b8866d9ca1828e4a: 21300000
+    - bab34d7818592428fbbcefd016da4401: 21300000
+    - abf615f8ad1eb4f1ca89bc5dbabfd06d: 21300000
+    - 63bd4a093986f428eac5285f7fd3eb6e: 21300000
+    - cd215ec97380d4a0082a08ca148fd930: 21300000
+    - ede182aa8cb2b4e19b03db01c41ce339: 21300000
+    - c2ac817e9f89f4c7a9bf759c9c5c9415: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 87c3bf319196144748de98fd0360d9d4, type: 3}
+  - {fileID: 21300000, guid: 7d8063b4cc2044ad39f2363c5b94c1fe, type: 3}
+  - {fileID: 21300000, guid: 9035bc060efa342a59b196f190c8a5e0, type: 3}
+  - {fileID: 21300000, guid: 68ee5c1711ff1483b8866d9ca1828e4a, type: 3}
+  - {fileID: 21300000, guid: bab34d7818592428fbbcefd016da4401, type: 3}
+  - {fileID: 21300000, guid: abf615f8ad1eb4f1ca89bc5dbabfd06d, type: 3}
+  - {fileID: 21300000, guid: 63bd4a093986f428eac5285f7fd3eb6e, type: 3}
+  - {fileID: 21300000, guid: cd215ec97380d4a0082a08ca148fd930, type: 3}
+  - {fileID: 21300000, guid: ede182aa8cb2b4e19b03db01c41ce339, type: 3}
+  - {fileID: 21300000, guid: c2ac817e9f89f4c7a9bf759c9c5c9415, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - b421_4
+  - b421_5
+  - b421_1
+  - b421_3
+  - dwad_text
+  - dwad_bg
+  - b421_2
+  - b421_0
+  - btn_playad
+  - dwad_close
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

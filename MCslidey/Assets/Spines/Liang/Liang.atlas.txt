@@ -1,0 +1,27 @@
+
+Liang.png
+size: 512,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lvbg1
+  rotate: false
+  xy: 2, 33
+  size: 389, 29
+  orig: 389, 29
+  offset: 0, 0
+  index: -1
+lvbg2
+  rotate: false
+  xy: 393, 13
+  size: 89, 49
+  orig: 89, 49
+  offset: 0, 0
+  index: -1
+lvbg3
+  rotate: false
+  xy: 2, 2
+  size: 204, 29
+  orig: 204, 29
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b605597dbbdfb460c8000b2d70bc0c6e, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - d6be5f702342b40f88e2e3b4156d9488: 21300000
+    - 21d9b6908ac5937499d34e59b2fae316: 21300000
+    - f028052364f934d8abac6771424ca437: 21300000
+    - 3fdb04c5aa0a2420a80fa18176aec46e: 21300000
+    - fd541516cd6f747b892a91e0dcadad96: 21300000
+    - 5275971a78bb3462a86bf738ff1651d6: 21300000
+    - ba5b0d0b7be8c4495850245d1013aa73: 21300000
+    - 6402184bba63f44ebb698c249f4b287a: 21300000
+    - 16cf588b0492045378628821af2f50c8: 21300000
+    - fcbae4bbe1d864427a65e9123c02418f: 21300000
+    - 80042dbc754544bfead7cef576bdf844: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: d6be5f702342b40f88e2e3b4156d9488, type: 3}
+  - {fileID: 21300000, guid: 21d9b6908ac5937499d34e59b2fae316, type: 3}
+  - {fileID: 21300000, guid: f028052364f934d8abac6771424ca437, type: 3}
+  - {fileID: 21300000, guid: 3fdb04c5aa0a2420a80fa18176aec46e, type: 3}
+  - {fileID: 21300000, guid: fd541516cd6f747b892a91e0dcadad96, type: 3}
+  - {fileID: 21300000, guid: 5275971a78bb3462a86bf738ff1651d6, type: 3}
+  - {fileID: 21300000, guid: ba5b0d0b7be8c4495850245d1013aa73, type: 3}
+  - {fileID: 21300000, guid: 6402184bba63f44ebb698c249f4b287a, type: 3}
+  - {fileID: 21300000, guid: 16cf588b0492045378628821af2f50c8, type: 3}
+  - {fileID: 21300000, guid: fcbae4bbe1d864427a65e9123c02418f, type: 3}
+  - {fileID: 21300000, guid: 80042dbc754544bfead7cef576bdf844, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 3
+  - 4
+  - 0
+  - 7
+  - 4
+  - 2
+  - 8
+  - 5
+  - 6
+  - 1
+  - 9
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

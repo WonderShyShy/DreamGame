@@ -1,0 +1,405 @@
+
+flash_1.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hsd40003
+  rotate: false
+  xy: 1, 609
+  size: 260, 88
+  orig: 260, 88
+  offset: 0, 0
+  index: -1
+hsd40001
+  rotate: false
+  xy: 1, 519
+  size: 260, 88
+  orig: 260, 88
+  offset: 0, 0
+  index: -1
+hsd40002
+  rotate: false
+  xy: 263, 611
+  size: 260, 88
+  orig: 260, 88
+  offset: 0, 0
+  index: -1
+hsd10003
+  rotate: false
+  xy: 445, 921
+  size: 256, 43
+  orig: 260, 50
+  offset: 0, 1
+  index: -1
+hsd10004
+  rotate: false
+  xy: 223, 968
+  size: 259, 50
+  orig: 260, 50
+  offset: 0, 0
+  index: -1
+hsd10005
+  rotate: false
+  xy: 484, 968
+  size: 258, 50
+  orig: 260, 50
+  offset: 1, 0
+  index: -1
+hsd10006
+  rotate: false
+  xy: 744, 825
+  size: 257, 46
+  orig: 260, 50
+  offset: 3, 4
+  index: -1
+hsd10001
+  rotate: false
+  xy: 744, 775
+  size: 258, 48
+  orig: 260, 50
+  offset: 1, 0
+  index: -1
+hsd10002
+  rotate: false
+  xy: 744, 873
+  size: 256, 46
+  orig: 260, 50
+  offset: 4, 0
+  index: -1
+hsd20006
+  rotate: false
+  xy: 445, 775
+  size: 41, 87
+  orig: 50, 100
+  offset: 6, 7
+  index: -1
+hsd20001
+  rotate: false
+  xy: 667, 770
+  size: 42, 87
+  orig: 50, 100
+  offset: 8, 5
+  index: -1
+hsd20002
+  rotate: false
+  xy: 703, 859
+  size: 39, 82
+  orig: 50, 100
+  offset: 10, 9
+  index: -1
+hsd20003
+  rotate: false
+  xy: 942, 921
+  size: 42, 88
+  orig: 50, 100
+  offset: 8, 7
+  index: -1
+hsd20004
+  rotate: false
+  xy: 488, 775
+  size: 41, 87
+  orig: 50, 100
+  offset: 8, 6
+  index: -1
+hsd20005
+  rotate: false
+  xy: 445, 153
+  size: 49, 86
+  orig: 50, 100
+  offset: 0, 6
+  index: -1
+hsd30004
+  rotate: false
+  xy: 986, 964
+  size: 32, 40
+  orig: 32, 40
+  offset: 0, 0
+  index: -1
+hsd30005
+  rotate: false
+  xy: 986, 921
+  size: 32, 41
+  orig: 32, 41
+  offset: 0, 0
+  index: -1
+hsd30006
+  rotate: false
+  xy: 642, 859
+  size: 36, 38
+  orig: 36, 38
+  offset: 0, 0
+  index: -1
+hsd30001
+  rotate: false
+  xy: 531, 775
+  size: 36, 35
+  orig: 36, 35
+  offset: 0, 0
+  index: -1
+hsd30007
+  rotate: false
+  xy: 531, 859
+  size: 51, 57
+  orig: 51, 57
+  offset: 0, 0
+  index: -1
+hsd30002
+  rotate: false
+  xy: 445, 864
+  size: 55, 50
+  orig: 55, 50
+  offset: 0, 0
+  index: -1
+hsd30008
+  rotate: false
+  xy: 842, 964
+  size: 53, 58
+  orig: 53, 58
+  offset: 0, 0
+  index: -1
+hsd30003
+  rotate: false
+  xy: 897, 964
+  size: 35, 42
+  orig: 35, 42
+  offset: 0, 0
+  index: -1
+kg1
+  rotate: false
+  xy: 1, 1
+  size: 510, 150
+  orig: 510, 150
+  offset: 0, 0
+  index: -1
+chilun1
+  rotate: false
+  xy: 744, 921
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+ls1
+  rotate: false
+  xy: 525, 611
+  size: 112, 69
+  orig: 112, 69
+  offset: 0, 0
+  index: -1
+chilun2
+  rotate: false
+  xy: 711, 770
+  size: 30, 31
+  orig: 30, 31
+  offset: 0, 0
+  index: -1
+electricity_5_20
+  rotate: false
+  xy: 445, 367
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_21
+  rotate: false
+  xy: 223, 275
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_22
+  rotate: false
+  xy: 647, 598
+  size: 220, 106
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_01
+  rotate: false
+  xy: 1, 397
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_23
+  rotate: false
+  xy: 842, 921
+  size: 98, 41
+  orig: 220, 120
+  offset: 78, 0
+  index: -1
+electricity_5_02
+  rotate: false
+  xy: 584, 859
+  size: 56, 28
+  orig: 220, 120
+  offset: 0, 92
+  index: -1
+electricity_5_24
+  rotate: false
+  xy: 263, 557
+  size: 156, 35
+  orig: 220, 120
+  offset: 54, 0
+  index: -1
+electricity_5_03
+  rotate: false
+  xy: 445, 489
+  size: 200, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_25
+  rotate: false
+  xy: 223, 893
+  size: 220, 73
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_04
+  rotate: false
+  xy: 223, 153
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_26
+  rotate: false
+  xy: 223, 701
+  size: 220, 98
+  orig: 220, 120
+  offset: 0, 13
+  index: -1
+electricity_5_05
+  rotate: false
+  xy: 735, 1
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_27
+  rotate: false
+  xy: 223, 801
+  size: 220, 90
+  orig: 220, 120
+  offset: 0, 21
+  index: -1
+electricity_5_06
+  rotate: false
+  xy: 1, 275
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_28
+  rotate: false
+  xy: 647, 489
+  size: 220, 107
+  orig: 220, 120
+  offset: 0, 11
+  index: -1
+electricity_5_07
+  rotate: false
+  xy: 735, 123
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_29
+  rotate: false
+  xy: 1, 699
+  size: 220, 103
+  orig: 220, 120
+  offset: 0, 11
+  index: -1
+electricity_5_08
+  rotate: false
+  xy: 667, 245
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_09
+  rotate: false
+  xy: 667, 367
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_10
+  rotate: false
+  xy: 1, 892
+  size: 220, 76
+  orig: 220, 120
+  offset: 0, 44
+  index: -1
+electricity_5_11
+  rotate: false
+  xy: 223, 397
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_12
+  rotate: false
+  xy: 445, 245
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_13
+  rotate: false
+  xy: 513, 123
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_14
+  rotate: false
+  xy: 1, 804
+  size: 220, 86
+  orig: 220, 120
+  offset: 0, 12
+  index: -1
+electricity_5_15
+  rotate: false
+  xy: 513, 1
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_16
+  rotate: false
+  xy: 445, 706
+  size: 220, 67
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_17
+  rotate: false
+  xy: 667, 706
+  size: 220, 62
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_18
+  rotate: false
+  xy: 263, 519
+  size: 174, 36
+  orig: 220, 120
+  offset: 45, 84
+  index: -1
+electricity_5_00
+  rotate: false
+  xy: 1, 153
+  size: 220, 120
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
+electricity_5_19
+  rotate: false
+  xy: 1, 970
+  size: 220, 48
+  orig: 220, 120
+  offset: 0, 0
+  index: -1
