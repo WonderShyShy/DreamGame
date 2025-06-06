@@ -40,9 +40,11 @@ namespace Models
         public static int BlockSpecialHangCountMax = 8;
         public static float SecondChanceClearEffTime = 0.7f;
         
+
+        //暂时ban掉
         //其他特殊块出现规则
-        public static bool SpecialBronzeSwitch = true;//青铜开关
-        public static bool SpecialGoldSwitch = true;//金色开关
+        public static bool SpecialBronzeSwitch = false;//青铜开关
+        public static bool SpecialGoldSwitch = false;//金色开关
         public static string SpecialGoldEffWeight = "1:0:0";//金色块的三个效果随机权重（消除一种颜色，4变4个1，不生成新方块）
         public static int SpecialGoldEffNoNewBlocksTime = 10;//不生成新方块等待时间
         public static string SpecialBronzeRandom = "50,100,50";
@@ -65,9 +67,11 @@ namespace Models
         public static bool VibratorSwitch = false;//震动开关
         public static int VibratorTime = 300;//震动时间，ms
         public static int VibratorAmplitude = 200;//震动幅度，范围0-255
+
         
+         //暂时ban掉
         //冰块相关
-        public static bool IceBlockSwitch = true;//冰块开关
+        public static bool IceBlockSwitch = false;//冰块开关
         
         //level相关
         public static bool LevelToStageSwitch = false;//level文案改为stage开关
