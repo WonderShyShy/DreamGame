@@ -18,6 +18,29 @@ public class TetrisBlock : MonoBehaviour
     private Dictionary<Transform, Vector3> originalRowPositions;
     private Camera mainCamera;
     
+    /// <summary>
+    /// 静态方法：获取网格引用（供其他脚本使用）
+    /// </summary>
+    public static Transform GetGridReference(int x, int y)
+    {
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            return grid[x, y];
+        }
+        return null;
+    }
+    
+    /// <summary>
+    /// 静态方法：更新网格引用（供其他脚本使用）
+    /// </summary>
+    public static void UpdateGridReference(int x, int y, Transform blockTransform)
+    {
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            grid[x, y] = blockTransform;
+        }
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
