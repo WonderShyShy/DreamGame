@@ -27,8 +27,9 @@ public class TetrisBlock : MonoBehaviour
     public float ghostAlpha = 0.3f;
     
     private GameObject ghostPiece;
-    private Vector3 lastValidPosition;
-    private Quaternion lastValidRotation;
+    
+    // 静态变量跟踪当前活跃的下落方块
+    private static TetrisBlock currentFallingBlock = null;
     
     /// <summary>
     /// 静态方法：获取网格引用（供其他脚本使用）
@@ -59,12 +60,13 @@ public class TetrisBlock : MonoBehaviour
         mainCamera = Camera.main;
         originalRowPositions = new Dictionary<Transform, Vector3>();
         
+        // 注册为当前下落方块
+        currentFallingBlock = this;
+        
         // 初始化影子提示
         if (enableGhostPiece)
         {
             CreateGhostPiece();
-            lastValidPosition = transform.position;
-            lastValidRotation = transform.rotation;
         }
     }
 
@@ -122,17 +124,6 @@ public class TetrisBlock : MonoBehaviour
             }
             previousTime = Time.time;
         }
-        
-        // 更新影子提示（检查位置或旋转是否改变）
-        if (enableGhostPiece && ghostPiece != null)
-        {
-            if (transform.position != lastValidPosition || transform.rotation != lastValidRotation)
-            {
-                UpdateGhostPiece();
-                lastValidPosition = transform.position;
-                lastValidRotation = transform.rotation;
-            }
-        }
     }
     
     void HandleMouseClick()
@@ -181,6 +172,9 @@ public class TetrisBlock : MonoBehaviour
             {
                 Debug.Log($"第{selectedRow}行移动完成");
             }
+            
+            // 🆕 拖拽完成后更新当前下落方块的影子
+            UpdateCurrentGhost();
         }
         
         isDragging = false;
@@ -363,13 +357,21 @@ public class TetrisBlock : MonoBehaviour
 
     void CheckForLines()
     {
+        bool hasLineCleared = false;
         for (int i = height-1; i >= 0; i--)
         {
             if(HasLine(i))
             {
                 DeleteLine(i);
                 RowDown(i);
+                hasLineCleared = true;
             }
+        }
+        
+        // 🆕 消行后更新当前下落方块的影子
+        if (hasLineCleared)
+        {
+            UpdateCurrentGhost();
         }
     }
 
@@ -507,9 +509,13 @@ public class TetrisBlock : MonoBehaviour
     /// <summary>
     /// 更新影子位置
     /// </summary>
-    void UpdateGhostPiece()
+    public void UpdateGhostPiece()
     {
         if (!enableGhostPiece || ghostPiece == null)
+            return;
+            
+        // 🆕 添加安全检查：方块已落地不需要更新影子
+        if (!enabled)
             return;
         
         // 计算影子应该在的位置
@@ -549,10 +555,44 @@ public class TetrisBlock : MonoBehaviour
     }
     
     /// <summary>
+    /// 静态方法：更新当前下落方块的影子
+    /// </summary>
+    public static void UpdateCurrentGhost()
+    {
+        if (currentFallingBlock != null && 
+            currentFallingBlock.enabled && 
+            currentFallingBlock.enableGhostPiece)
+        {
+            currentFallingBlock.UpdateGhostPiece();
+        }
+    }
+    
+    /// <summary>
+    /// 方块禁用时清理静态引用
+    /// </summary>
+    void OnDisable()
+    {
+        // 清理静态引用
+        if (currentFallingBlock == this)
+        {
+            currentFallingBlock = null;
+        }
+        
+        // 清理影子
+        DestroyGhostPiece();
+    }
+    
+    /// <summary>
     /// 当对象被销毁时清理影子
     /// </summary>
     void OnDestroy()
     {
+        // 清理静态引用
+        if (currentFallingBlock == this)
+        {
+            currentFallingBlock = null;
+        }
+        
         DestroyGhostPiece();
     }
 

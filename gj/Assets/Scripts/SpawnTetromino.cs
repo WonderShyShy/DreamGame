@@ -100,6 +100,9 @@ public class SpawnTetromino : MonoBehaviour
         {
             Debug.Log($"方块 {tetrominoName} 成功旋转了 {successfulRotations} 次 ({successfulRotations * 90}°)");
         }
+        
+        // 🆕 随机旋转完成后更新影子
+        tetrominoScript.UpdateGhostPiece();
     }
     
     /// <summary>
