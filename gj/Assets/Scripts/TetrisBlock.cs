@@ -18,6 +18,18 @@ public class TetrisBlock : MonoBehaviour
     private Dictionary<Transform, Vector3> originalRowPositions;
     private Camera mainCamera;
     
+    // 影子提示相关变量
+    [Header("影子提示设置")]
+    [Tooltip("是否启用影子提示")]
+    public bool enableGhostPiece = true;
+    [Tooltip("影子的透明度(0-1)")]
+    [Range(0f, 1f)]
+    public float ghostAlpha = 0.3f;
+    
+    private GameObject ghostPiece;
+    private Vector3 lastValidPosition;
+    private Quaternion lastValidRotation;
+    
     /// <summary>
     /// 静态方法：获取网格引用（供其他脚本使用）
     /// </summary>
@@ -46,6 +58,14 @@ public class TetrisBlock : MonoBehaviour
     {
         mainCamera = Camera.main;
         originalRowPositions = new Dictionary<Transform, Vector3>();
+        
+        // 初始化影子提示
+        if (enableGhostPiece)
+        {
+            CreateGhostPiece();
+            lastValidPosition = transform.position;
+            lastValidRotation = transform.rotation;
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +96,8 @@ public class TetrisBlock : MonoBehaviour
             transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0,0,1), 90);
             if (!ValidMove())
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
+            else
+                UpdateGhostPiece(); // 旋转成功后更新影子
         }
 
         // 自动下落逻辑保持不变
@@ -88,11 +110,28 @@ public class TetrisBlock : MonoBehaviour
                 AddToGrid();
                 CheckForLines();
 
+                // 方块落地，销毁影子
+                DestroyGhostPiece();
                 this.enabled = false;
                 FindObjectOfType<SpawnTetromino>().NewTetromino();
 
             }
+            else
+            {
+                UpdateGhostPiece(); // 下落成功后更新影子
+            }
             previousTime = Time.time;
+        }
+        
+        // 更新影子提示（检查位置或旋转是否改变）
+        if (enableGhostPiece && ghostPiece != null)
+        {
+            if (transform.position != lastValidPosition || transform.rotation != lastValidRotation)
+            {
+                UpdateGhostPiece();
+                lastValidPosition = transform.position;
+                lastValidRotation = transform.rotation;
+            }
         }
     }
     
@@ -381,7 +420,7 @@ public class TetrisBlock : MonoBehaviour
         }
     }
 
-    bool ValidMove()
+    public bool ValidMove()
     {
         foreach (Transform children in transform)
         {
@@ -398,6 +437,123 @@ public class TetrisBlock : MonoBehaviour
         }
 
         return true;
+    }
+    
+    /// <summary>
+    /// 验证指定位置的移动是否有效（用于影子计算）
+    /// </summary>
+    bool ValidMoveAtPosition(Vector3 position)
+    {
+        Vector3 originalPos = transform.position;
+        transform.position = position;
+        
+        bool isValid = ValidMove();
+        
+        transform.position = originalPos;
+        return isValid;
+    }
+    
+    /// <summary>
+    /// 创建影子方块
+    /// </summary>
+    void CreateGhostPiece()
+    {
+        if (ghostPiece != null)
+        {
+            Destroy(ghostPiece);
+        }
+        
+        // 克隆当前方块
+        ghostPiece = Instantiate(gameObject);
+        
+        // 移除影子的TetrisBlock组件，避免重复逻辑
+        TetrisBlock ghostScript = ghostPiece.GetComponent<TetrisBlock>();
+        if (ghostScript != null)
+        {
+            Destroy(ghostScript);
+        }
+        
+        // 设置影子的视觉效果
+        SetGhostVisualStyle(ghostPiece);
+        
+        // 设置影子名称
+        ghostPiece.name = gameObject.name + "_Ghost";
+        
+        // 更新影子位置
+        UpdateGhostPiece();
+    }
+    
+    /// <summary>
+    /// 设置影子的视觉样式
+    /// </summary>
+    void SetGhostVisualStyle(GameObject ghost)
+    {
+        // 获取所有子对象的SpriteRenderer
+        SpriteRenderer[] renderers = ghost.GetComponentsInChildren<SpriteRenderer>();
+        
+        foreach (SpriteRenderer renderer in renderers)
+        {
+            // 统一设置为淡白色
+            Color ghostColor = Color.white;
+            ghostColor.a = ghostAlpha;
+            
+            renderer.color = ghostColor;
+            
+            // 设置渲染层级，让影子在主方块后面
+            renderer.sortingOrder = renderer.sortingOrder - 1;
+        }
+    }
+    
+    /// <summary>
+    /// 更新影子位置
+    /// </summary>
+    void UpdateGhostPiece()
+    {
+        if (!enableGhostPiece || ghostPiece == null)
+            return;
+        
+        // 计算影子应该在的位置
+        Vector3 ghostPosition = CalculateGhostPosition();
+        
+        // 更新影子的位置和旋转
+        ghostPiece.transform.position = ghostPosition;
+        ghostPiece.transform.rotation = transform.rotation;
+    }
+    
+    /// <summary>
+    /// 计算影子的最终位置
+    /// </summary>
+    Vector3 CalculateGhostPosition()
+    {
+        Vector3 testPosition = transform.position;
+        
+        // 持续向下移动直到碰撞
+        while (ValidMoveAtPosition(testPosition + Vector3.down))
+        {
+            testPosition += Vector3.down;
+        }
+        
+        return testPosition;
+    }
+    
+    /// <summary>
+    /// 销毁影子方块
+    /// </summary>
+    void DestroyGhostPiece()
+    {
+        if (ghostPiece != null)
+        {
+            Destroy(ghostPiece);
+            ghostPiece = null;
+        }
+    }
+    
+    /// <summary>
+    /// 当对象被销毁时清理影子
+    /// </summary>
+    void OnDestroy()
+    {
+        DestroyGhostPiece();
     }
 
 
