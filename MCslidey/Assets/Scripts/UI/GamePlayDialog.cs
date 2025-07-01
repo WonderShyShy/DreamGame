@@ -1227,7 +1227,7 @@ namespace UI
                         {
                             StartCoroutine(Delay.Run(() => { MoveEnd(); }, 0.1f));
                         }
-                    }, Constant.DownAnimTime + 0.01f));
+                    }, Constant.DownAnimTime + _maxDownAnimDelayTime + 0.01f));
             }
             else
             {
@@ -1601,8 +1601,12 @@ namespace UI
             ManagerAudio.PlaySound("blockUp");
         }
 
+        private float _maxDownAnimDelayTime = 0f; // 存储最大下落延迟时间
+        
         void DownBlockItemsAnim(List<int[]> downList)
         {
+            _maxDownAnimDelayTime = 0f; // 重置最大延迟时间
+            
             foreach (var downData in downList)
             {
                 if (_itemList[downData[1]] != null)
@@ -1610,9 +1614,20 @@ namespace UI
                     //downData[0]下落高度，downData[1]下落方块
                     _itemList[downData[1] + Constant.Lie * downData[0]] = _itemList[downData[1]];
                     _itemList[downData[1]] = null;
+                    
+                    // 计算方块所在行（从上往下计算）
+                    int rowIndex = downData[1] / Constant.Lie;
+                    float delayTime = rowIndex * Constant.DownRowDelayTime;
+                    
+                    // 更新最大延迟时间
+                    if (delayTime > _maxDownAnimDelayTime)
+                    {
+                        _maxDownAnimDelayTime = delayTime;
+                    }
+                    
                     _itemList[downData[1] + Constant.Lie * downData[0]].transform
                         .DOLocalMoveY(_itemList[downData[1] + Constant.Lie * downData[0]].transform.localPosition.y + Constant.BlockHeight * downData[0],
-                            Constant.DownAnimTime).SetEase(_easeEff);
+                            Constant.DownAnimTime).SetDelay(delayTime).SetEase(_easeEff);
 
                     _itemList[downData[1] + Constant.Lie * downData[0]].GetComponent<BlockItem>().LastDownOffsetY =
                         downData[0];

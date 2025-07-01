@@ -90,6 +90,7 @@ namespace Models
         //可配置参数
         public static float UpAnimTime = 0.2f;
         public static float DownAnimTime = 0.16f;
+        public static float DownRowDelayTime = 0.01f; // 每行下落间隔时间（瀑布式效果）
         public static float BlockRemoveTime = 0.3f;
         public static float SpecialClearTime = 0.7f;
         public static float SpecialGoldClearTime = 0.3f;
