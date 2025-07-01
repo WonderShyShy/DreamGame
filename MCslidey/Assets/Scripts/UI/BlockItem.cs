@@ -325,7 +325,8 @@ namespace UI
                 _blockBgLightEff.SetActive(true);
             }
 
-            _blockBgLightEff.transform.localPosition = new Vector2(_originalPos.x + _deltaX * Constant.BlockWidth, _blockBgLightEff.transform.localPosition.y);
+            // 修改：让长条虚影实时跟随方块位置，而不是跳跃式移动
+            _blockBgLightEff.transform.localPosition = new Vector2(transform.localPosition.x, _blockBgLightEff.transform.localPosition.y);
 
             if (Constant.SceneVersion == "3")
             {
