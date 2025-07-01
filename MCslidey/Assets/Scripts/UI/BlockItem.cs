@@ -1,4 +1,5 @@
 ﻿using BFF;
+using Manager;
 using Models;
 using Other;
 using UnityEngine;
@@ -254,6 +255,11 @@ namespace UI
                 if (_deltaX != 0)
                 {
                     Constant.GamePlayScript.MoveEnd(new[] { _deltaX, 0, _data[(int)Blocks.Key.Pos] });
+                }
+                else
+                {
+                    // 方块回到原位，播放Minecraft蜡烛音效
+                    ManagerAudio.PlaySound("add_candle1");
                 }
                 _tmpEdgePos = null;
             }

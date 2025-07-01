@@ -174,7 +174,7 @@ namespace UI
 
             CheckShowTopUIMask(true);
 
-            ManagerAudio.SetMusicVolume(0.2f);
+            ManagerAudio.SetMusicVolume(0.6f);
             ManagerAudio.PlayMusic("bg");
             ManagerAudio.SetSoundVolume(1.0f);
 
