@@ -50,11 +50,11 @@ namespace Models
         public static string SpecialBronzeRandom = "50,100,50";
         public static string SpecialGoldRandom = "100,150,200";
         public static string PreviousBlocks = "";
-        public static bool SpecialGoldAdInterstitialSwitch = false;//消除金色块后展示插屏广告
-        public static bool SpecialGoldAdRvAndInterSwitch = false;//消除金色块后，如果没有激励视频就用插屏
+        public static bool SpecialGoldAdInterstitialSwitch = false;//消除金色块后展示插屏广告 - 已禁用
+        public static bool SpecialGoldAdRvAndInterSwitch = false;//消除金色块后，如果没有激励视频就用插屏 - 已禁用
         public static bool SpecialGoldCountDownSwitch = false;//金色块倒计时开关
         public static int SpecialGoldCountDownNum = 15;//金色块倒计时时间
-        public static bool SpecialGoldAdClear = false;//出发金块效果需要看视频开关
+        public static bool SpecialGoldAdClear = false;//出发金块效果需要看视频开关 - 已禁用
         
         //石头块相关参数
         public static bool StoneSwitch = false;//石头块功能开关
@@ -113,7 +113,7 @@ namespace Models
         public static int B43221NotAddBlockStep = 2;
         public static int B43221RemoveSlideNumber = 3;//出现该功能后，3步之内不使用，则移除
         public static string B43221BlockPro = "2:1";//切割方块比例
-        public static bool SecondChanceEnabled = true;//激励视频开关
+        public static bool SecondChanceEnabled = false;//激励视频开关 - 已禁用倒计时看广告功能
         public static bool AchievementSwitch = false;//成就系统开关
         public static string ScoreToStar = "0,4000,12000";//分数评星
         public static int SecondChanceScore = 0;//二次机会出现分数条件
@@ -159,6 +159,14 @@ namespace Models
         public static GamePlayDialog GamePlayScript;
         public static EffectController EffCtrlScript;
         public static AchievementTips AchievementScript;
+        
+        //智能拖动吸附系统
+        public static bool SmartDragAttractionSwitch = true;         // 主开关，已启用测试
+        public static float SmartDragSpeedThreshold = 200f;          // 慢速拖动阈值(像素/秒) - 降低阈值，更容易触发
+        public static float SmartDragAttractionThreshold = 0.12f;    // 吸附距离阈值(格子宽度比例) - 12%精确吸附
+        public static float SmartDragDeadZone = 0.08f;               // 死区阈值(格子宽度比例) - 8%防抖动区域
+        public static float SmartDragSpeedSmoothingFactor = 0.3f;    // 速度平滑系数
+        public static bool SmartDragDebugMode = true;                // 调试模式，显示速度信息（已启用）
         
         //topicID
         public static string TopicID = "topic-8a21ixizu";

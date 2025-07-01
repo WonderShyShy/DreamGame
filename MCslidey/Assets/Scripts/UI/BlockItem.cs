@@ -26,6 +26,15 @@ namespace UI
         //当前位置
         private Vector2 _dstPos;
 
+        // 智能拖动相关变量
+        private float _currentDragSpeed = 0f;        // 当前拖动速度
+        private float _averageDragSpeed = 0f;        // 平均拖动速度
+        private Vector2 _lastDragPos = Vector2.zero; // 上一帧拖动位置
+        private float _lastDragTime = 0f;            // 上一帧时间
+        private bool _isSlowDragMode = false;        // 当前是否为慢速拖动模式
+        private int _lockedGridOffset = int.MaxValue; // 当前锁定的格子偏移（用于避免频繁跳跃）
+        private bool _isGridLocked = false;          // 是否已锁定到某个格子
+
         private GameObject _blockBgLightEff;
         private GameObject _blockBgTip;
         private GameObject _blockLightTip;
@@ -176,6 +185,10 @@ namespace UI
             _tmpEdgePos = new[] { Constant.BlockGroupEdgeLeft + Constant.BlockWidth * tmpEdgeIndex[0], Constant.BlockGroupEdgeLeft + Constant.BlockWidth * tmpEdgeIndex[1] };
 
             _deltaX = 0;
+            
+            // 初始化智能拖动状态（不影响现有逻辑）
+            ResetDragState();
+            
             ShowBlockBgLightEff();
         }
 
@@ -196,10 +209,35 @@ namespace UI
 
             if (_tmpEdgePos != null)
             {
+                // 原始位置计算（保持不变）
+                Vector2 rawPos = _originalPos + pos;
+                rawPos.y = _originalPos.y;
                 
-                _dstPos = _originalPos + pos;
-                _dstPos.y = _originalPos.y;
+                // 智能拖动逻辑（新增，可通过开关控制）
+                if (Constant.SmartDragAttractionSwitch)
+                {
+                    // 计算拖动速度
+                    float dragSpeed = CalculateDragSpeed(rawPos);
+                    
+                    // 判断拖动模式
+                    _isSlowDragMode = dragSpeed < Constant.SmartDragSpeedThreshold;
+                    
+                    // 应用吸附效果
+                    _dstPos = ApplyGridAttraction(rawPos, _isSlowDragMode);
+                    
+                    // 调试模式输出
+                    if (Constant.SmartDragDebugMode)
+                    {
+                        Debug.Log($"拖动速度: {dragSpeed:F1}, 模式: {(_isSlowDragMode ? "慢速吸附" : "快速跟随")}");
+                    }
+                }
+                else
+                {
+                    // 原始行为（功能关闭时）
+                    _dstPos = rawPos;
+                }
 
+                // 边界检查（保持原逻辑不变）
                 if (_dstPos.x <= _tmpEdgePos[0])
                 {
                     _dstPos.x = _tmpEdgePos[0];
@@ -208,6 +246,8 @@ namespace UI
                 {
                     _dstPos.x = _tmpEdgePos[1];
                 }
+                
+                // 应用位置（保持不变）
                 transform.localPosition = _dstPos;
                 _deltaX = Tools.ChinaRound((transform.localPosition.x - _originalPos.x) / Constant.BlockWidth);
                 ShowBlockBgLightEff();
@@ -228,6 +268,12 @@ namespace UI
             Player.IsBlockMoving = false;
 
             HideBlockBgLightEff();
+
+            // 清理拖动状态
+            if (Constant.SmartDragAttractionSwitch)
+            {
+                ResetDragState();
+            }
 
             if (Player.IsInGuide())
             {
@@ -297,6 +343,150 @@ namespace UI
             {
                 _blockLightTip.SetActive(false);
             }
+        }
+
+        /// <summary>
+        /// 检查是否应该禁用智能拖动（特殊情况）
+        /// </summary>
+        private bool ShouldDisableSmartDrag()
+        {
+            // 新手引导期间禁用智能拖动，避免干扰
+            if (Player.IsInGuide())
+            {
+                return true;
+            }
+            
+            // 石头方块禁用
+            if (IsSpecial() && GetSpecial() == (int)Blocks.Special.Stone)
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
+        /// <summary>
+        /// 计算拖动速度（像素/秒）
+        /// </summary>
+        private float CalculateDragSpeed(Vector2 currentPos)
+        {
+            if (!Constant.SmartDragAttractionSwitch || ShouldDisableSmartDrag()) 
+                return 0f;
+            
+            float currentTime = Time.unscaledTime;
+            
+            // 防止除零错误
+            if (_lastDragTime > 0)
+            {
+                float deltaTime = currentTime - _lastDragTime;
+                if (deltaTime > 0.001f) // 最小时间间隔，避免极小的deltaTime
+                {
+                    Vector2 deltaPos = currentPos - _lastDragPos;
+                    _currentDragSpeed = deltaPos.magnitude / deltaTime;
+                    
+                    // 限制最大速度，避免异常值
+                    _currentDragSpeed = Mathf.Clamp(_currentDragSpeed, 0f, 5000f);
+                    
+                    // 使用指数移动平均平滑速度
+                    _averageDragSpeed = Mathf.Lerp(_averageDragSpeed, _currentDragSpeed, 
+                        Constant.SmartDragSpeedSmoothingFactor);
+                }
+            }
+            
+            _lastDragPos = currentPos;
+            _lastDragTime = currentTime;
+            
+            return _averageDragSpeed;
+        }
+
+        /// <summary>
+        /// 应用格子吸附效果 - 跳跃式吸附
+        /// </summary>
+        private Vector2 ApplyGridAttraction(Vector2 rawPos, bool isSlowMode)
+        {
+            if (!Constant.SmartDragAttractionSwitch || !isSlowMode || ShouldDisableSmartDrag())
+            {
+                // 功能关闭或快速模式，清除锁定状态
+                _isGridLocked = false;
+                _lockedGridOffset = int.MaxValue;
+                return rawPos;
+            }
+            
+            Vector2 result = rawPos;
+            
+            // 计算当前格子偏移（相对于原始位置）
+            float gridOffset = (rawPos.x - _originalPos.x) / Constant.BlockWidth;
+            int nearestGridOffset = Mathf.RoundToInt(gridOffset);
+            
+            // 计算到最近格子中心的距离比例（相对于格子宽度）
+            float distanceRatio = Mathf.Abs(gridOffset - nearestGridOffset);
+            
+            // 定义阈值
+            float attractionThreshold = Constant.SmartDragAttractionThreshold; // 0.3f = 格子宽度的30%
+            float deadZone = Constant.SmartDragDeadZone; // 0.15f = 格子宽度的15%
+            
+            if (_isGridLocked)
+            {
+                // 已锁定状态：只有离开死区才能解锁
+                if (_lockedGridOffset != nearestGridOffset)
+                {
+                    // 移动到了不同的格子区域
+                    float distanceToLocked = Mathf.Abs(gridOffset - _lockedGridOffset);
+                    if (distanceToLocked > deadZone)
+                    {
+                        // 离开死区，解除锁定
+                        _isGridLocked = false;
+                        _lockedGridOffset = int.MaxValue;
+                    }
+                    else
+                    {
+                        // 仍在死区内，保持锁定
+                        result.x = _originalPos.x + _lockedGridOffset * Constant.BlockWidth;
+                        return result;
+                    }
+                }
+                else
+                {
+                    // 在同一格子内，保持锁定
+                    result.x = _originalPos.x + _lockedGridOffset * Constant.BlockWidth;
+                    return result;
+                }
+            }
+            
+            // 未锁定状态：检查是否应该吸附
+            if (distanceRatio < attractionThreshold)
+            {
+                // 进入吸附区域，直接跳到格子中心
+                _isGridLocked = true;
+                _lockedGridOffset = nearestGridOffset;
+                result.x = _originalPos.x + nearestGridOffset * Constant.BlockWidth;
+                
+                if (Constant.SmartDragDebugMode)
+                {
+                    Debug.Log($"🧲 吸附到格子: {nearestGridOffset}, 距离比例: {distanceRatio:F2}");
+                }
+            }
+            else
+            {
+                // 在自由区域，完全跟随手指
+                result.x = rawPos.x;
+            }
+            
+            return result;
+        }
+
+        /// <summary>
+        /// 重置拖动状态
+        /// </summary>
+        private void ResetDragState()
+        {
+            _currentDragSpeed = 0f;
+            _averageDragSpeed = 0f;
+            _lastDragPos = Vector2.zero;
+            _lastDragTime = 0f;
+            _isSlowDragMode = false;
+            _isGridLocked = false;
+            _lockedGridOffset = int.MaxValue;
         }
     }
 }

@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class AdManager : MonoBehaviour
 {
     [Header("Development Settings")]
-    public bool enableAds = false;  // 广告系统总开关
+    public bool enableAds = false;  // 广告系统总开关 - 已禁用倒计时看广告功能
     
     [Header("Admob Ad Units :")]
     string idBanner = "ca-app-pub-8405254493226727/5337408778";
