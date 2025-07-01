@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 95d1dd280891f469caa791e30ae9085a, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 94998340354d34366a771730b9eb991c: 21300000
+    - 779f2f02b0c024e23828b7a93d9ae385: 21300000
+    - 19c1d1729a3f6422e9dd31468957628e: 21300000
+    - 7a9161e3d44244e2f9330d93146293c0: 21300000
+    - c0aa1695993dc49628553a324441b305: 21300000
+    - fc7051c91b91345b9b79439f317d1052: 21300000
+    - b8f3929e1af8c4ef58d416db490b213c: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 94998340354d34366a771730b9eb991c, type: 3}
+  - {fileID: 21300000, guid: 779f2f02b0c024e23828b7a93d9ae385, type: 3}
+  - {fileID: 21300000, guid: 19c1d1729a3f6422e9dd31468957628e, type: 3}
+  - {fileID: 21300000, guid: 7a9161e3d44244e2f9330d93146293c0, type: 3}
+  - {fileID: 21300000, guid: c0aa1695993dc49628553a324441b305, type: 3}
+  - {fileID: 21300000, guid: fc7051c91b91345b9b79439f317d1052, type: 3}
+  - {fileID: 21300000, guid: b8f3929e1af8c4ef58d416db490b213c, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - clearArrow_1
+  - clearArrow_0
+  - clearArrow_2
+  - guideHand
+  - clearArrow_5
+  - clearArrow_3
+  - clearArrow_4
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d68b1e1b253fd4f3697d8474da80e197, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 43405e50ba38a4f1b8b88fc621a9b0be: 21300000
+    - 187df7c04458c4b70a8175b045ed9c6e: 21300000
+    - 195c6102436404c1c8b9659fb509d2a4: 21300000
+    - 74cb1582fbd7141f5a9e1ef0acb45999: 21300000
+    - a93987d2e0c404cd6a9c52e101bda9eb: 21300000
+    - dd179853a759b4f26bd22b7471469590: 21300000
+    - ee6d29340f56f4546b60f8b4a1ee0396: 21300000
+    - 2758f1bba1e6948bb8e3fe3dbf9ce448: 21300000
+    - 54eccaec60b214968b5a618a52db4e95: 21300000
+    - 93460f0f8dd924f8d882e61440e84a52: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 43405e50ba38a4f1b8b88fc621a9b0be, type: 3}
+  - {fileID: 21300000, guid: 187df7c04458c4b70a8175b045ed9c6e, type: 3}
+  - {fileID: 21300000, guid: 195c6102436404c1c8b9659fb509d2a4, type: 3}
+  - {fileID: 21300000, guid: 74cb1582fbd7141f5a9e1ef0acb45999, type: 3}
+  - {fileID: 21300000, guid: a93987d2e0c404cd6a9c52e101bda9eb, type: 3}
+  - {fileID: 21300000, guid: dd179853a759b4f26bd22b7471469590, type: 3}
+  - {fileID: 21300000, guid: ee6d29340f56f4546b60f8b4a1ee0396, type: 3}
+  - {fileID: 21300000, guid: 2758f1bba1e6948bb8e3fe3dbf9ce448, type: 3}
+  - {fileID: 21300000, guid: 54eccaec60b214968b5a618a52db4e95, type: 3}
+  - {fileID: 21300000, guid: 93460f0f8dd924f8d882e61440e84a52, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - emoji_5
+  - labelImg_noThx
+  - emoji_2
+  - emoji_1
+  - emoji_4
+  - star_1
+  - bg_rage
+  - btn_rate
+  - star_2
+  - emoji_3
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

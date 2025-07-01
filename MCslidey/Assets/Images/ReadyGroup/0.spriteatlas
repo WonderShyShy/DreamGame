@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 0b93cc3d257b04f18b386b5414da68d9, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 414ec234d58bb4490a7195d3505cad57: 21300000
+    - 0fa58ef57916f456cb681459c399dd8d: 21300000
+    - 673c57276663c46838760da3840b972a: 21300000
+    - d8c0694cd977d4f8c80b82ed7fa6fb32: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 414ec234d58bb4490a7195d3505cad57, type: 3}
+  - {fileID: 21300000, guid: 0fa58ef57916f456cb681459c399dd8d, type: 3}
+  - {fileID: 21300000, guid: 673c57276663c46838760da3840b972a, type: 3}
+  - {fileID: 21300000, guid: d8c0694cd977d4f8c80b82ed7fa6fb32, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - readyItemSpecial
+  - readyItem
+  - ready_gold
+  - ready_icon_bronze
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

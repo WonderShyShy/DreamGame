@@ -1,0 +1,111 @@
+
+NEWBEST.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ZZDG
+  rotate: false
+  xy: 516, 640
+  size: 361, 350
+  orig: 361, 350
+  offset: 0, 0
+  index: -1
+guang 1
+  rotate: false
+  xy: 579, 4
+  size: 177, 177
+  orig: 177, 177
+  offset: 0, 0
+  index: -1
+huangguan
+  rotate: false
+  xy: 2, 21
+  size: 575, 455
+  orig: 575, 455
+  offset: 0, 0
+  index: -1
+huangguan2
+  rotate: false
+  xy: 2, 478
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+qedggg
+  rotate: true
+  xy: 579, 183
+  size: 300, 356
+  orig: 300, 356
+  offset: 0, 0
+  index: -1
+quan
+  rotate: false
+  xy: 516, 485
+  size: 153, 153
+  orig: 153, 153
+  offset: 0, 0
+  index: -1
+quandong
+  rotate: false
+  xy: 758, 2
+  size: 167, 179
+  orig: 167, 179
+  offset: 0, 0
+  index: -1
+stone1
+  rotate: true
+  xy: 879, 880
+  size: 110, 118
+  orig: 110, 118
+  offset: 0, 0
+  index: -1
+stone11
+  rotate: true
+  xy: 879, 768
+  size: 110, 118
+  orig: 110, 118
+  offset: 0, 0
+  index: -1
+stone2
+  rotate: false
+  xy: 887, 489
+  size: 71, 56
+  orig: 71, 56
+  offset: 0, 0
+  index: -1
+stone21
+  rotate: true
+  xy: 960, 474
+  size: 71, 56
+  orig: 71, 56
+  offset: 0, 0
+  index: -1
+stone3
+  rotate: true
+  xy: 879, 647
+  size: 119, 98
+  orig: 119, 98
+  offset: 0, 0
+  index: -1
+stone31
+  rotate: false
+  xy: 887, 547
+  size: 119, 98
+  orig: 119, 98
+  offset: 0, 0
+  index: -1
+stone4
+  rotate: false
+  xy: 671, 496
+  size: 106, 142
+  orig: 106, 142
+  offset: 0, 0
+  index: -1
+stone41
+  rotate: false
+  xy: 779, 496
+  size: 106, 142
+  orig: 106, 142
+  offset: 0, 0
+  index: -1

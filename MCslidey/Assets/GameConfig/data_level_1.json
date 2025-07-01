@@ -1,0 +1,24 @@
+{
+	"data":[
+		{"level" : 1, "score" : 0, "level_reward" : "0", "score_ice" : 0, "ice_1" : 0, "ice_2" : 0, "ice_3" : 0, "hang_num" : 0, "delta_step" : 0, "max_ice_num" : 0},
+		{"level" : 2, "score" : 200, "level_reward" : "1", "score_ice" : 80, "ice_1" : 0, "ice_2" : 0, "ice_3" : 0, "hang_num" : 0, "delta_step" : 0, "max_ice_num" : 0},
+		{"level" : 3, "score" : 1200, "level_reward" : "12", "score_ice" : 500, "ice_1" : 0, "ice_2" : 0, "ice_3" : 0, "hang_num" : 0, "delta_step" : 0, "max_ice_num" : 0},
+		{"level" : 4, "score" : 6000, "level_reward" : "12g", "score_ice" : 1000, "ice_1" : 0, "ice_2" : 0, "ice_3" : 0, "hang_num" : 0, "delta_step" : 0, "max_ice_num" : 0},
+		{"level" : 5, "score" : 18000, "level_reward" : "123", "score_ice" : 2000, "ice_1" : 0, "ice_2" : 0, "ice_3" : 0, "hang_num" : 0, "delta_step" : 0, "max_ice_num" : 0},
+		{"level" : 6, "score" : 30000, "level_reward" : "123g", "score_ice" : 4000, "ice_1" : 100, "ice_2" : 0, "ice_3" : 0, "hang_num" : 1, "delta_step" : 8, "max_ice_num" : 1},
+		{"level" : 7, "score" : 42000, "level_reward" : "123g", "score_ice" : 6000, "ice_1" : 100, "ice_2" : 0, "ice_3" : 0, "hang_num" : 2, "delta_step" : 8, "max_ice_num" : 2},
+		{"level" : 8, "score" : 58000, "level_reward" : "23", "score_ice" : 8000, "ice_1" : 100, "ice_2" : 0, "ice_3" : 0, "hang_num" : 3, "delta_step" : 7, "max_ice_num" : 2},
+		{"level" : 9, "score" : 78000, "level_reward" : "23g", "score_ice" : 10000, "ice_1" : 100, "ice_2" : 50, "ice_3" : 0, "hang_num" : 4, "delta_step" : 6, "max_ice_num" : 3},
+		{"level" : 10, "score" : 100000, "level_reward" : "23g", "score_ice" : 15000, "ice_1" : 100, "ice_2" : 50, "ice_3" : 50, "hang_num" : 4, "delta_step" : 5, "max_ice_num" : 3},
+		{"level" : 11, "score" : 130000, "level_reward" : "3g", "score_ice" : 20000, "ice_1" : 100, "ice_2" : 100, "ice_3" : 50, "hang_num" : 4, "delta_step" : 5, "max_ice_num" : 4},
+		{"level" : 12, "score" : 180000, "level_reward" : "3g", "score_ice" : 50000, "ice_1" : 100, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 4},
+		{"level" : 13, "score" : 260000, "level_reward" : "3g", "score_ice" : 80000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 14, "score" : 400000, "level_reward" : "3g", "score_ice" : 120000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 15, "score" : 600000, "level_reward" : "3g", "score_ice" : 200000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 16, "score" : 800000, "level_reward" : "3g", "score_ice" : 300000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 17, "score" : 1000000, "level_reward" : "3g", "score_ice" : 500000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 18, "score" : 1200000, "level_reward" : "3g", "score_ice" : 800000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 19, "score" : 1400000, "level_reward" : "3g", "score_ice" : 1100000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5},
+		{"level" : 20, "score" : 1600000, "level_reward" : "3g", "score_ice" : 1500000, "ice_1" : 50, "ice_2" : 100, "ice_3" : 100, "hang_num" : 5, "delta_step" : 4, "max_ice_num" : 5}
+	]
+}

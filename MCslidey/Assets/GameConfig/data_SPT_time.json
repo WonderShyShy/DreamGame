@@ -1,0 +1,7 @@
+{
+	"data":[
+		{"id" : 1, "day_1_bestScore" : 1000, "day_1_time" : 3, "day_2_bestScore" : 1000, "day_2_time" : 5, "day_3_bestScore" : 1000, "day_3_time" : 5},
+		{"id" : 2, "day_1_bestScore" : 5000, "day_1_time" : 5, "day_2_bestScore" : 5000, "day_2_time" : 5, "day_3_bestScore" : 5000, "day_3_time" : 7},
+		{"id" : 3, "day_1_bestScore" : 10000, "day_1_time" : 7, "day_2_bestScore" : 10000, "day_2_time" : 7, "day_3_bestScore" : 10000, "day_3_time" : 7}
+	]
+}

@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 0
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: iPhone
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 56
+      m_TextureCompression: 1
+      m_CompressionQuality: 0
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: ec895037be6c34081b653a4f4b634c9b, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - c0f0424071fd249acb197236adf1139c: 21300000
+    - c9701f61dbfbb42b2bc86277a0b7350e: 21300000
+    - 546f93f2093ac46eaa2596ad0de4b668: 21300000
+    - a537a174ea147483c86ce075b04a64e2: 21300000
+    - a0169ea4c0a4a490187c48283f4129b0: 21300000
+    - d115df95ac94c4af79f2b2455fc9df50: 21300000
+    - 19d6ab56377c6421fa0db93e849c9780: 21300000
+    - 42f6ce179f51a4637a19418ed3a04500: 21300000
+    - 36a4acc7abb644c77a78edd28127ecad: 21300000
+    - 7e79d8e7c5f01467d9de1a7772383f71: 21300000
+    - 3373e1f74f27d4cecb7a755f8215e1a3: 21300000
+    - 85f9f0094ba4342daa2cb44a568f02a1: 21300000
+    - 8e6d14a9d47e641eb8c2782c93f75e15: 21300000
+    - d643296a113134fcd81be9e8d1632d3a: 21300000
+    - d10fec7bacc744b7caee2e2a5efca027: 21300000
+    - 4f6c055ce61fa4b26a8e3b88b1cdb6d2: 21300000
+    - c467010ddc7b5465ea63d9caf874a046: 21300000
+    - e542514dc819849728aca0d1595ef75a: 21300000
+    - b381a8eddcc534af184740b91da7f5a4: 21300000
+    - f9b3a6fd1cc7d43829c657cc347df448: 21300000
+    - 7250559fd9bd040aa9c768005ad506d8: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c0f0424071fd249acb197236adf1139c, type: 3}
+  - {fileID: 21300000, guid: c9701f61dbfbb42b2bc86277a0b7350e, type: 3}
+  - {fileID: 21300000, guid: 546f93f2093ac46eaa2596ad0de4b668, type: 3}
+  - {fileID: 21300000, guid: a537a174ea147483c86ce075b04a64e2, type: 3}
+  - {fileID: 21300000, guid: a0169ea4c0a4a490187c48283f4129b0, type: 3}
+  - {fileID: 21300000, guid: d115df95ac94c4af79f2b2455fc9df50, type: 3}
+  - {fileID: 21300000, guid: 19d6ab56377c6421fa0db93e849c9780, type: 3}
+  - {fileID: 21300000, guid: 42f6ce179f51a4637a19418ed3a04500, type: 3}
+  - {fileID: 21300000, guid: 36a4acc7abb644c77a78edd28127ecad, type: 3}
+  - {fileID: 21300000, guid: 7e79d8e7c5f01467d9de1a7772383f71, type: 3}
+  - {fileID: 21300000, guid: 3373e1f74f27d4cecb7a755f8215e1a3, type: 3}
+  - {fileID: 21300000, guid: 85f9f0094ba4342daa2cb44a568f02a1, type: 3}
+  - {fileID: 21300000, guid: 8e6d14a9d47e641eb8c2782c93f75e15, type: 3}
+  - {fileID: 21300000, guid: d643296a113134fcd81be9e8d1632d3a, type: 3}
+  - {fileID: 21300000, guid: d10fec7bacc744b7caee2e2a5efca027, type: 3}
+  - {fileID: 21300000, guid: 4f6c055ce61fa4b26a8e3b88b1cdb6d2, type: 3}
+  - {fileID: 21300000, guid: c467010ddc7b5465ea63d9caf874a046, type: 3}
+  - {fileID: 21300000, guid: e542514dc819849728aca0d1595ef75a, type: 3}
+  - {fileID: 21300000, guid: b381a8eddcc534af184740b91da7f5a4, type: 3}
+  - {fileID: 21300000, guid: f9b3a6fd1cc7d43829c657cc347df448, type: 3}
+  - {fileID: 21300000, guid: 7250559fd9bd040aa9c768005ad506d8, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - block_blue_2
+  - block_red_1
+  - block_green_3
+  - block_yellow_2
+  - block_blue_1
+  - block_green_2
+  - block_red_4
+  - block_pink_2
+  - block_blue_4
+  - block_red_3
+  - block_green_1
+  - block_pink_3
+  - blockShadow
+  - block_pink_1
+  - block_pink_4
+  - block_red_2
+  - block_green_4
+  - block_yellow_3
+  - block_yellow_4
+  - block_yellow_1
+  - block_blue_3
+  m_RenderDataMap: {}
+  m_Tag: 0
+  m_IsVariant: 0

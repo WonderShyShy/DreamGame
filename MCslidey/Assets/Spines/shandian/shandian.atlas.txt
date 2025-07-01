@@ -1,0 +1,195 @@
+
+shandian.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+electricity_5_09
+  rotate: false
+  xy: 123, 135
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_10
+  rotate: false
+  xy: 367, 308
+  size: 120, 41
+  orig: 120, 65
+  offset: 0, 24
+  index: -1
+electricity_5_16
+  rotate: false
+  xy: 1, 262
+  size: 120, 36
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_08
+  rotate: false
+  xy: 245, 1
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_18
+  rotate: false
+  xy: 245, 309
+  size: 94, 20
+  orig: 120, 65
+  offset: 25, 45
+  index: -1
+electricity_5_02
+  rotate: false
+  xy: 478, 135
+  size: 31, 15
+  orig: 120, 65
+  offset: 0, 50
+  index: -1
+electricity_5_04
+  rotate: false
+  xy: 367, 1
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_03
+  rotate: false
+  xy: 367, 135
+  size: 109, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_26
+  rotate: false
+  xy: 367, 202
+  size: 120, 53
+  orig: 120, 65
+  offset: 0, 7
+  index: -1
+electricity_5_28
+  rotate: false
+  xy: 1, 202
+  size: 120, 58
+  orig: 120, 65
+  offset: 0, 6
+  index: -1
+electricity_5_13
+  rotate: false
+  xy: 1, 135
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_29
+  rotate: false
+  xy: 245, 202
+  size: 120, 56
+  orig: 120, 65
+  offset: 0, 6
+  index: -1
+electricity_5_11
+  rotate: false
+  xy: 1, 68
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_25
+  rotate: false
+  xy: 123, 261
+  size: 120, 40
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_07
+  rotate: false
+  xy: 1, 1
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_20
+  rotate: false
+  xy: 245, 68
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_06
+  rotate: false
+  xy: 123, 1
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_14
+  rotate: false
+  xy: 245, 260
+  size: 120, 47
+  orig: 120, 65
+  offset: 0, 6
+  index: -1
+electricity_5_17
+  rotate: false
+  xy: 1, 300
+  size: 120, 34
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_27
+  rotate: false
+  xy: 367, 257
+  size: 120, 49
+  orig: 120, 65
+  offset: 0, 11
+  index: -1
+electricity_5_15
+  rotate: false
+  xy: 367, 68
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_23
+  rotate: false
+  xy: 1, 336
+  size: 53, 22
+  orig: 120, 65
+  offset: 43, 0
+  index: -1
+electricity_5_24
+  rotate: false
+  xy: 123, 331
+  size: 86, 19
+  orig: 120, 65
+  offset: 29, 0
+  index: -1
+electricity_5_19
+  rotate: false
+  xy: 123, 303
+  size: 120, 26
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_05
+  rotate: false
+  xy: 123, 68
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_12
+  rotate: false
+  xy: 245, 135
+  size: 120, 65
+  orig: 120, 65
+  offset: 0, 0
+  index: -1
+electricity_5_22
+  rotate: false
+  xy: 123, 202
+  size: 120, 57
+  orig: 120, 65
+  offset: 0, 0
+  index: -1

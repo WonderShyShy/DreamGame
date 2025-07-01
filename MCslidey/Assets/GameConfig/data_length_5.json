@@ -1,0 +1,15 @@
+{
+	"data":[
+		{"id" : 1, "score_min" : 0, "rate_1" : 100, "rate_2" : 100, "rate_3" : 80, "rate_4" : 80},
+		{"id" : 4, "score_min" : 15, "rate_1" : 100, "rate_2" : 100, "rate_3" : 100, "rate_4" : 100},
+		{"id" : 6, "score_min" : 35, "rate_1" : 100, "rate_2" : 100, "rate_3" : 100, "rate_4" : 100},
+		{"id" : 7, "score_min" : 55, "rate_1" : 100, "rate_2" : 100, "rate_3" : 50, "rate_4" : 50},
+		{"id" : 8, "score_min" : 60, "rate_1" : 100, "rate_2" : 100, "rate_3" : 125, "rate_4" : 125},
+		{"id" : 9, "score_min" : 85, "rate_1" : 100, "rate_2" : 100, "rate_3" : 150, "rate_4" : 150},
+		{"id" : 10, "score_min" : 110, "rate_1" : 100, "rate_2" : 100, "rate_3" : 50, "rate_4" : 50},
+		{"id" : 11, "score_min" : 115, "rate_1" : 100, "rate_2" : 100, "rate_3" : 170, "rate_4" : 170},
+		{"id" : 12, "score_min" : 145, "rate_1" : 100, "rate_2" : 100, "rate_3" : 170, "rate_4" : 200},
+		{"id" : 13, "score_min" : 175, "rate_1" : 100, "rate_2" : 100, "rate_3" : 50, "rate_4" : 50},
+		{"id" : 14, "score_min" : 182, "rate_1" : 80, "rate_2" : 100, "rate_3" : 200, "rate_4" : 200}
+	]
+}

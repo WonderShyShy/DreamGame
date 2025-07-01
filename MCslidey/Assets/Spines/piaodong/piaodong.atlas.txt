@@ -1,0 +1,20 @@
+
+piaodong.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guangD1
+  rotate: false
+  xy: 93, 1
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+cloud_soft
+  rotate: false
+  xy: 1, 1
+  size: 90, 122
+  orig: 90, 122
+  offset: 0, 0
+  index: -1

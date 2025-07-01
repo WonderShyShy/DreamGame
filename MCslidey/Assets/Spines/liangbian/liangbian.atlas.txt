@@ -1,0 +1,20 @@
+
+liangbian.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+waiguang
+  rotate: false
+  xy: 1, 1
+  size: 182, 220
+  orig: 182, 220
+  offset: 0, 0
+  index: -1
+waiguang1
+  rotate: false
+  xy: 185, 1
+  size: 150, 190
+  orig: 150, 190
+  offset: 0, 0
+  index: -1
