@@ -229,7 +229,7 @@ namespace UI
 
             await LoadResAsync_boardEffItemPool();
             
-            //坐下角起步
+            // 四向中心汇聚动画
             var fadeInTime = 0.15f;
             var waitDeltaTime = 0.07f;
             if (Constant.SceneVersion == "3")
@@ -237,88 +237,36 @@ namespace UI
                 fadeInTime = 0.7f;
                 waitDeltaTime = 0.08f;
             }
-            for (var i = 0; i < Constant.Lie; ++i)
-            {
-                var cx = i;
-                var cy = 0;
-//                var img = cx % 2 == 0 ? boardEffItemImgs[1] : boardEffItemImgs[0];
-//                if (Constant.SceneVersion == "3")
-//                {
-//                    img = null;
-//                }
-
-                while (cx >= 0)
-                {
-                    var eff = _boardEffItemPool.Get();
-                    eff.transform.SetParent(effGroup.transform);
-                    eff.transform.localScale = Vector2.one;
-//                    if (img != null)
-//                    {
-//                        eff.GetComponent<Image>().sprite = img;
-//                    }
-                    eff.GetComponent<RectTransform>().sizeDelta = new Vector2(Constant.BlockWidth, Constant.BlockHeight);
-                    eff.transform.localPosition = new Vector2(Constant.BlockGroupEdgeLeft + cx * Constant.BlockWidth, Constant.BlockGroupEdgeBottom + cy * Constant.BlockHeight);
-                    eff.GetComponent<CanvasGroup>().alpha = 0;
-                    eff.GetComponent<CanvasGroup>().DOFade(1, fadeInTime).SetDelay(waitDeltaTime * i + waitDeltaTime);
-                    _boardEffItemArr.Add(eff);
-
-                    --cx;
-                    ++cy;
-                }
-            }
-
-            //右上角起步
-            for (var i = Constant.Lie - 1; i >= 0; --i)
-            {
-                var cx = i;
-                var cy = Constant.Hang - 1;
-//                var img = cx % 2 == 0 ? boardEffItemImgs[0] : boardEffItemImgs[1];
-//                if (Constant.SceneVersion == "3")
-//                {
-//                    img = null;
-//                }
-                while (cx <= Constant.Lie - 1)
-                {
-                    var eff = _boardEffItemPool.Get();
-                    eff.transform.SetParent(effGroup.transform);
-                    eff.transform.localScale = Vector2.one;
-//                    if (img != null)
-//                    {
-//                        eff.GetComponent<Image>().sprite = img;
-//                    }
-                    eff.GetComponent<RectTransform>().sizeDelta = new Vector2(Constant.BlockWidth, Constant.BlockHeight);
-                    eff.transform.localPosition = new Vector2(Constant.BlockGroupEdgeLeft + cx * Constant.BlockWidth, Constant.BlockGroupEdgeBottom + cy * Constant.BlockHeight);
-                    eff.GetComponent<CanvasGroup>().alpha = 0;
-                    eff.GetComponent<CanvasGroup>().DOFade(1, fadeInTime).SetDelay(waitDeltaTime * (Constant.Lie - 1 - i));
-                    _boardEffItemArr.Add(eff);
-                    
-                    ++cx;
-                    --cy;
-                }
-            }
-
-            //中间特殊
-            var cyy = Constant.Hang - 2;
-            var cxx = 0;
-            while (cxx <= Constant.Lie - 1)
-            {
-                var eff = _boardEffItemPool.Get();
-                eff.transform.SetParent(effGroup.transform);
-                eff.transform.localScale = Vector2.one;
-//                if (Constant.SceneVersion != "3")
-//                {
-//                    eff.GetComponent<Image>().sprite = boardEffItemImgs[1];
-//                }
-                eff.GetComponent<RectTransform>().sizeDelta = new Vector2(Constant.BlockWidth, Constant.BlockHeight);
-                eff.transform.localPosition = new Vector2(Constant.BlockGroupEdgeLeft + cxx * Constant.BlockWidth, Constant.BlockGroupEdgeBottom + cyy * Constant.BlockHeight);
-                eff.GetComponent<CanvasGroup>().alpha = 0;
-                eff.GetComponent<CanvasGroup>().DOFade(1, fadeInTime).SetDelay(waitDeltaTime * (Constant.Lie));
-                _boardEffItemArr.Add(eff);
-
-                ++cxx;
-                --cyy;
-            }
             
+            // 遍历所有网格位置，创建四向汇聚效果
+            for (var x = 0; x < Constant.Lie; ++x)
+            {
+                for (var y = 0; y < Constant.Hang; ++y)
+                {
+                    // 计算到四个角落的曼哈顿距离
+                    var distTopLeft = x + (Constant.Hang - 1 - y);           // 到左上角距离
+                    var distTopRight = (Constant.Lie - 1 - x) + (Constant.Hang - 1 - y);  // 到右上角距离
+                    var distBottomLeft = x + y;                              // 到左下角距离
+                    var distBottomRight = (Constant.Lie - 1 - x) + y;        // 到右下角距离
+                    
+                    // 使用最小距离，让四个角落同时开始向中心汇聚
+                    var minDistance = Mathf.Min(distTopLeft, distTopRight, distBottomLeft, distBottomRight);
+                    
+                    // 创建网格特效
+                    var eff = _boardEffItemPool.Get();
+                    eff.transform.SetParent(effGroup.transform);
+                    eff.transform.localScale = Vector2.one;
+                    eff.GetComponent<RectTransform>().sizeDelta = new Vector2(Constant.BlockWidth, Constant.BlockHeight);
+                    eff.transform.localPosition = new Vector2(Constant.BlockGroupEdgeLeft + x * Constant.BlockWidth, 
+                                                             Constant.BlockGroupEdgeBottom + y * Constant.BlockHeight);
+                    eff.GetComponent<CanvasGroup>().alpha = 0;
+                    
+                    // 使用距离计算延迟时间：距离越远（靠近角落）越早开始，营造向中心汇聚的效果
+                    var delay = minDistance * waitDeltaTime + waitDeltaTime;
+                    eff.GetComponent<CanvasGroup>().DOFade(1, fadeInTime).SetDelay(delay);
+                    _boardEffItemArr.Add(eff);
+                }
+            }
             if (boardEff != null)
             {
                 boardEff.gameObject.SetActive(true);

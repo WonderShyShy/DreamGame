@@ -48,6 +48,9 @@ namespace UI
                 {
                     btnVibrateGroup.SetActive(false);
                 }
+                
+                // 隐藏Privacy Policy按钮
+                btnPrivacy.SetActive(false);
             
                 _originalX = btnSettingOpen.transform.localPosition.x;
                 _moveOffsetX = _originalX * 2;
@@ -204,11 +207,11 @@ namespace UI
 
             if (Constant.VibratorSwitch)
             {
-                btnPrivacy.transform.DOLocalMoveX(_originalX - _moveOffsetX, 0.3f).SetEase(Ease.OutCubic);
-                btnMusicGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 5, 0.3f).SetEase(Ease.OutCubic);
-                btnSoundGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 5 * 2, 0.3f).SetEase(Ease.OutCubic);
-                btnVibrateGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 5 * 3, 0.3f).SetEase(Ease.OutCubic);
-                btnRestart.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 5 * 4, 0.3f).SetEase(Ease.OutCubic).OnComplete(
+                // Privacy按钮已隐藏，不需要动画处理
+                btnMusicGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4, 0.3f).SetEase(Ease.OutCubic);
+                btnSoundGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4 * 2, 0.3f).SetEase(Ease.OutCubic);
+                btnVibrateGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4 * 3, 0.3f).SetEase(Ease.OutCubic);
+                btnRestart.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4 * 4, 0.3f).SetEase(Ease.OutCubic).OnComplete(
                     () =>
                     {
                         _isAnimating = false;
@@ -216,10 +219,10 @@ namespace UI
             }
             else
             {
-                btnPrivacy.transform.DOLocalMoveX(_originalX - _moveOffsetX, 0.3f).SetEase(Ease.OutCubic);
-                btnMusicGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4, 0.3f).SetEase(Ease.OutCubic);
-                btnSoundGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4 * 2, 0.3f).SetEase(Ease.OutCubic);
-                btnRestart.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 4 * 3, 0.3f).SetEase(Ease.OutCubic).OnComplete(
+                // Privacy按钮已隐藏，不需要动画处理
+                btnMusicGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 3, 0.3f).SetEase(Ease.OutCubic);
+                btnSoundGroup.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 3 * 2, 0.3f).SetEase(Ease.OutCubic);
+                btnRestart.transform.DOLocalMoveX(_originalX - _moveOffsetX + _moveOffsetX / 3 * 3, 0.3f).SetEase(Ease.OutCubic).OnComplete(
                     () =>
                     {
                         _isAnimating = false;
@@ -241,7 +244,7 @@ namespace UI
             
             _isAnimating = true;
 
-            btnPrivacy.transform.DOLocalMoveX(_originalX, 0.2f).SetEase(Ease.OutCubic);
+            // Privacy按钮已隐藏，不需要动画处理
             btnMusicGroup.transform.DOLocalMoveX(_originalX, 0.2f).SetEase(Ease.OutCubic);
             btnSoundGroup.transform.DOLocalMoveX(_originalX, 0.2f).SetEase(Ease.OutCubic);
             btnRestart.transform.DOLocalMoveX(_originalX, 0.2f).SetEase(Ease.OutCubic);

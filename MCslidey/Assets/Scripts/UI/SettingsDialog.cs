@@ -67,6 +67,10 @@ namespace UI
             {
                 ManagerLocalData.SetStringData(ManagerLocalData.VIBRATE_SWITCH, "on");
             }
+            
+            // 隐藏Privacy Policy按钮
+            btnPrivacy.SetActive(false);
+            
             ResetBtnStatus();
         }
 
