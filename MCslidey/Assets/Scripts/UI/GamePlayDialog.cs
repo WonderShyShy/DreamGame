@@ -8,6 +8,8 @@ using Models;
 using Newtonsoft.Json;
 using Other;
 using UnityEngine;
+using BFF;
+using Lofelt.NiceVibrations;
 
 namespace UI
 {
@@ -53,6 +55,10 @@ namespace UI
         private int _specialGoldEffNoNewBlocksTime = 0;
         private Ease _easeEff = Ease.OutSine;
         //        private Ease _easeEff = Ease.InOutCubic;
+
+        // 震动相关私有变量
+        private float _lastClearVibrationTime = 0f;          // 上次消除震动时间
+        private const float CLEAR_VIBRATION_COOLDOWN = 0.1f; // 消除震动冷却时间（100ms）
 
         void CreateBlockBgLightEff()
         {
@@ -174,7 +180,7 @@ namespace UI
 
             CheckShowTopUIMask(true);
 
-            ManagerAudio.SetMusicVolume(0.2f);
+            ManagerAudio.SetMusicVolume(0.6f);
             ManagerAudio.PlayMusic("bg");
             ManagerAudio.SetSoundVolume(1.0f);
 
@@ -502,6 +508,9 @@ namespace UI
 
                             foreach (var specialData in clearSpecialBlocks)
                             {
+                                // 触发特殊方块消除震动
+                                TriggerSpecialClearVibration(specialData[(int)Blocks.Key.Special]);
+                                
                                 switch (specialData[(int)Blocks.Key.Special])
                                 {
                                     case (int)Blocks.Special.Rainbow:
@@ -828,6 +837,22 @@ namespace UI
                                         Constant.GameStatusData.RemoveShake++;
                                         if (shouldVibrator)
                                         {
+                                            // 触发消除震动
+                                            TriggerClearVibration(clearHang.Count, _clearCombo);
+                                            
+                                            for (var i = 0; i < clearHang.Count; ++i)
+                                            {
+                                                if (i == 0)
+                                                {
+                                                    var soundIndex = _clearCombo > 5 ? 5 : _clearCombo;
+                                                    ManagerAudio.PlaySound("clearHang" + soundIndex);
+                                                    ++_clearComboSound;
+                                                }
+                                                else
+                                                {
+                                                    ManagerAudio.PlaySound("clearHang" + _clearComboSound);
+                                                }
+                                            }
                                         }
                                     }
 
@@ -852,6 +877,22 @@ namespace UI
                                     Constant.GameStatusData.RemoveShake++;
                                     if (shouldVibrator)
                                     {
+                                        // 触发消除震动
+                                        TriggerClearVibration(clearHang.Count, _clearCombo);
+                                        
+                                        for (var i = 0; i < clearHang.Count; ++i)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                var soundIndex = _clearCombo > 5 ? 5 : _clearCombo;
+                                                ManagerAudio.PlaySound("clearHang" + soundIndex);
+                                                ++_clearComboSound;
+                                            }
+                                            else
+                                            {
+                                                ManagerAudio.PlaySound("clearHang" + _clearComboSound);
+                                            }
+                                        }
                                     }
                                 }
                                 if (clearHang.Count > 1)
@@ -1227,7 +1268,7 @@ namespace UI
                         {
                             StartCoroutine(Delay.Run(() => { MoveEnd(); }, 0.1f));
                         }
-                    }, Constant.DownAnimTime + 0.01f));
+                    }, Constant.DownAnimTime + _maxDownAnimDelayTime + 0.01f));
             }
             else
             {
@@ -1601,8 +1642,12 @@ namespace UI
             ManagerAudio.PlaySound("blockUp");
         }
 
+        private float _maxDownAnimDelayTime = 0f; // 存储最大下落延迟时间
+        
         void DownBlockItemsAnim(List<int[]> downList)
         {
+            _maxDownAnimDelayTime = 0f; // 重置最大延迟时间
+            
             foreach (var downData in downList)
             {
                 if (_itemList[downData[1]] != null)
@@ -1610,9 +1655,20 @@ namespace UI
                     //downData[0]下落高度，downData[1]下落方块
                     _itemList[downData[1] + Constant.Lie * downData[0]] = _itemList[downData[1]];
                     _itemList[downData[1]] = null;
+                    
+                    // 计算方块所在行（从上往下计算）
+                    int rowIndex = downData[1] / Constant.Lie;
+                    float delayTime = rowIndex * Constant.DownRowDelayTime;
+                    
+                    // 更新最大延迟时间
+                    if (delayTime > _maxDownAnimDelayTime)
+                    {
+                        _maxDownAnimDelayTime = delayTime;
+                    }
+                    
                     _itemList[downData[1] + Constant.Lie * downData[0]].transform
                         .DOLocalMoveY(_itemList[downData[1] + Constant.Lie * downData[0]].transform.localPosition.y + Constant.BlockHeight * downData[0],
-                            Constant.DownAnimTime).SetEase(_easeEff);
+                            Constant.DownAnimTime).SetDelay(delayTime).SetEase(_easeEff);
 
                     _itemList[downData[1] + Constant.Lie * downData[0]].GetComponent<BlockItem>().LastDownOffsetY =
                         downData[0];
@@ -2260,6 +2316,113 @@ namespace UI
             _clearTipTime += Constant.FrameTime;
             CheckClearTip();
 
+        }
+
+        /// <summary>
+        /// 触发方块消除震动
+        /// </summary>
+        private void TriggerClearVibration(int clearCount, int comboLevel = 0)
+        {
+            if (!ShouldTriggerClearVibration()) return;
+            
+            // 根据消除数量和连击等级选择震动类型
+            HapticPatterns.PresetType vibrationType;
+            string vibrationDescription;
+            
+            if (comboLevel >= 3)
+            {
+                // 高连击：重度震动
+                vibrationType = HapticPatterns.PresetType.HeavyImpact;
+                vibrationDescription = $"高连击消除震动 (连击{comboLevel}x)";
+            }
+            else if (clearCount >= 3)
+            {
+                // 多行消除：中度震动
+                vibrationType = HapticPatterns.PresetType.MediumImpact;
+                vibrationDescription = $"多行消除震动 ({clearCount}行)";
+            }
+            else if (clearCount >= 2)
+            {
+                // 双行消除：轻度震动
+                vibrationType = HapticPatterns.PresetType.LightImpact;
+                vibrationDescription = $"双行消除震动 ({clearCount}行)";
+            }
+            else
+            {
+                // 单行消除：成功震动
+                vibrationType = HapticPatterns.PresetType.Success;
+                vibrationDescription = "单行消除震动";
+            }
+            
+            HapticPatterns.PlayPreset(vibrationType);
+            _lastClearVibrationTime = Time.unscaledTime;
+            
+            if (Constant.SmartDragDebugMode)
+            {
+                Debug.Log($"🎉 {vibrationDescription}");
+            }
+        }
+
+        /// <summary>
+        /// 触发特殊方块消除震动
+        /// </summary>
+        private void TriggerSpecialClearVibration(int specialType)
+        {
+            if (!ShouldTriggerClearVibration()) return;
+            
+            HapticPatterns.PresetType vibrationType;
+            string vibrationDescription;
+            
+            switch (specialType)
+            {
+                case (int)Blocks.Special.Rainbow:
+                    vibrationType = HapticPatterns.PresetType.HeavyImpact;
+                    vibrationDescription = "彩虹方块消除震动";
+                    break;
+                case (int)Blocks.Special.Bronze:
+                    vibrationType = HapticPatterns.PresetType.MediumImpact;
+                    vibrationDescription = "青铜方块消除震动";
+                    break;
+                case (int)Blocks.Special.Gold:
+                    vibrationType = HapticPatterns.PresetType.HeavyImpact;
+                    vibrationDescription = "金色方块消除震动";
+                    break;
+                default:
+                    vibrationType = HapticPatterns.PresetType.MediumImpact;
+                    vibrationDescription = "特殊方块消除震动";
+                    break;
+            }
+            
+            HapticPatterns.PlayPreset(vibrationType);
+            _lastClearVibrationTime = Time.unscaledTime;
+            
+            if (Constant.SmartDragDebugMode)
+            {
+                Debug.Log($"✨ {vibrationDescription}");
+            }
+        }
+
+        /// <summary>
+        /// 检查是否应该触发消除震动
+        /// </summary>
+        private bool ShouldTriggerClearVibration()
+        {
+            // 检查震动开关（假设在Player或设置中有震动开关）
+            // if (!Player.VibrationEnabled) return false;
+            
+            // 检查冷却时间
+            if (Time.unscaledTime - _lastClearVibrationTime < CLEAR_VIBRATION_COOLDOWN)
+            {
+                return false;
+            }
+            
+            // 检查是否在新手引导中
+            if (Player.IsInGuide())
+            {
+                return false;
+            }
+            
+            return true;
         }
     }
 }

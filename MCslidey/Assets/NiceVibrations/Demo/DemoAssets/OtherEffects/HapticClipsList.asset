@@ -1,0 +1,277 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955f7daef15384b0190b0eaf475ff9b8, type: 3}
+  m_Name: HapticClipsList
+  m_EditorClassIdentifier: 
+  clips:
+  - clip: {fileID: -8404250095460277587, guid: 27b2f1a81ed0042058d5e12a4ff355c9, type: 3}
+    name: Alert1
+  - clip: {fileID: -8404250095460277587, guid: 0ec40230bd576417ea32eaa2f8f784e2, type: 3}
+    name: Award1
+  - clip: {fileID: -8404250095460277587, guid: fafb36cf7b1ae455cb46b5f952075a53, type: 3}
+    name: Beep1
+  - clip: {fileID: -8404250095460277587, guid: 02f81e28fa53f46de9734ba5a14d9891, type: 3}
+    name: Beep2
+  - clip: {fileID: -8404250095460277587, guid: 6a7e2ca1987944de39aba76339acf1b0, type: 3}
+    name: Beep3
+  - clip: {fileID: -8404250095460277587, guid: 288ca76b927d24b3eb9b30fc8a464b92, type: 3}
+    name: Button1
+  - clip: {fileID: -8404250095460277587, guid: 2a076dfae72a84088855d51a4c2259f4, type: 3}
+    name: Button2
+  - clip: {fileID: -8404250095460277587, guid: bb27b2715855c43e68e953138ae502c0, type: 3}
+    name: Button3
+  - clip: {fileID: -8404250095460277587, guid: 0d2b5984bc090493787fc3bc832277d3, type: 3}
+    name: Button4
+  - clip: {fileID: -8404250095460277587, guid: 66f3ca43b4d1b4b69936896892e1eab1, type: 3}
+    name: CameraShutter1
+  - clip: {fileID: -8404250095460277587, guid: 51d42e1b295bb40feb427fa841e60e12, type: 3}
+    name: Hover1
+  - clip: {fileID: -8404250095460277587, guid: dbe66c4ad71ff4b6cb27fc4e9cbfddc7, type: 3}
+    name: Hover2
+  - clip: {fileID: -8404250095460277587, guid: ea7d34d87f5e647b087c1b6e686028ca, type: 3}
+    name: Pop1
+  - clip: {fileID: -8404250095460277587, guid: d143c29eff85741f2baf4141cea19c8d, type: 3}
+    name: FootstepGrass1
+  - clip: {fileID: -8404250095460277587, guid: 66766b9d15c7f465b8577c523b317356, type: 3}
+    name: FootstepGrass2
+  - clip: {fileID: -8404250095460277587, guid: 4ee94e04a4ac8463e81379f13e61d7ca, type: 3}
+    name: FootstepGrass3
+  - clip: {fileID: -8404250095460277587, guid: eb740385b45ef49b98e7b3e932fee206, type: 3}
+    name: FootstepGravel1
+  - clip: {fileID: -8404250095460277587, guid: d4398599ca1964a6c83248616d030c53, type: 3}
+    name: FootstepGravel2
+  - clip: {fileID: -8404250095460277587, guid: b91f6265583fe4773aebfa75cad86a2f, type: 3}
+    name: FootstepGravel3
+  - clip: {fileID: -8404250095460277587, guid: d8be2a80c3db142d29343ab0ac2b6dff, type: 3}
+    name: FootstepSnow1
+  - clip: {fileID: -8404250095460277587, guid: ce8bd75dffeee4051b8952ee4b2ca7e1, type: 3}
+    name: Body1
+  - clip: {fileID: -8404250095460277587, guid: e0d9d544789ef40469cd266d3ba5a814, type: 3}
+    name: Body2
+  - clip: {fileID: -8404250095460277587, guid: 3d30a37fa8b8b4239a9e5a8ecf2bcca0, type: 3}
+    name: Body3
+  - clip: {fileID: -8404250095460277587, guid: 473149a0cff2b4a01901360eef1fcef9, type: 3}
+    name: BulletCrack1
+  - clip: {fileID: -8404250095460277587, guid: 2760372a5930146c880106e10f9a3c06, type: 3}
+    name: BulletCrack2
+  - clip: {fileID: -8404250095460277587, guid: c7833764644ba41a29b1d11de2f3a62f, type: 3}
+    name: BulletCrack3
+  - clip: {fileID: -8404250095460277587, guid: 7d9f91002f7704512888884c6e6c0cc0, type: 3}
+    name: BulletMetal1
+  - clip: {fileID: -8404250095460277587, guid: 59d416c84824f4c428a7087364aa244b, type: 3}
+    name: CarCrash1
+  - clip: {fileID: -8404250095460277587, guid: d2b7fe7395e1243c08b607ed95765840, type: 3}
+    name: CombatPunch1
+  - clip: {fileID: -8404250095460277587, guid: d6f022528b4a64551bd772c576be2eed, type: 3}
+    name: CombatPunch2
+  - clip: {fileID: -8404250095460277587, guid: b842d36097a784c6e9639ff0d7a42557, type: 3}
+    name: Concrete1
+  - clip: {fileID: -8404250095460277587, guid: 403c90a1ed71b4c92970bae66c263683, type: 3}
+    name: Concrete2
+  - clip: {fileID: -8404250095460277587, guid: 3c2b770a337e648528945c0b97fa31f3, type: 3}
+    name: Concrete3
+  - clip: {fileID: -8404250095460277587, guid: a87fdd11c2dfb48b58a2ba866de3e2f1, type: 3}
+    name: Glass1
+  - clip: {fileID: -8404250095460277587, guid: 6f76a5d7ab3cd4390989fb08c34c39a3, type: 3}
+    name: Glass2
+  - clip: {fileID: -8404250095460277587, guid: 902148089959e4e0094692971d6a817c, type: 3}
+    name: Glass3
+  - clip: {fileID: -8404250095460277587, guid: f24e8159953ef44feb8ca992ccd1d60a, type: 3}
+    name: ImpactMetal1
+  - clip: {fileID: -8404250095460277587, guid: f5fabd937f2c64601beaefd717589e11, type: 3}
+    name: Punch1
+  - clip: {fileID: -8404250095460277587, guid: 27cf281de1d7c4108876df39298ea6dd, type: 3}
+    name: Wood1
+  - clip: {fileID: -8404250095460277587, guid: a0f88f56e03f94bbdbbe5e5cd63a703c, type: 3}
+    name: Wood2
+  - clip: {fileID: -8404250095460277587, guid: 81bb5ef83e33448a4a77f92040007a11, type: 3}
+    name: Wood3
+  - clip: {fileID: -8404250095460277587, guid: c6cf6a975bc4d470b893bf21271b54a7, type: 3}
+    name: Cymbal1
+  - clip: {fileID: -8404250095460277587, guid: 7a6a5b8d33df74587a64f37e99156676, type: 3}
+    name: Cymbal2
+  - clip: {fileID: -8404250095460277587, guid: 7268020c2da5f4e0294961269554c996, type: 3}
+    name: Cymbal3
+  - clip: {fileID: -8404250095460277587, guid: 8a936e0f4bd6142b69aad2e28fb97a95, type: 3}
+    name: Drums1
+  - clip: {fileID: -8404250095460277587, guid: a7979fc6240354abb890260bd49f2545, type: 3}
+    name: Drums2
+  - clip: {fileID: -8404250095460277587, guid: c967e91fd14e9473e914fb827a8febc7, type: 3}
+    name: Kick1
+  - clip: {fileID: -8404250095460277587, guid: ee64990eca96a44ee9ae0026023073fa, type: 3}
+    name: Kick2
+  - clip: {fileID: -8404250095460277587, guid: 5ca7bbd41447b43a0adf826b58700385, type: 3}
+    name: Snare1
+  - clip: {fileID: -8404250095460277587, guid: 4e1ef87bcd90a468b8cd62ff71a5ee2b, type: 3}
+    name: Tom1
+  - clip: {fileID: -8404250095460277587, guid: 0e40f98e11e954b7b9ff01db701357e9, type: 3}
+    name: Tom2
+  - clip: {fileID: -8404250095460277587, guid: f7201d9cdb3ce48338e0d5a2e3c5a483, type: 3}
+    name: CatPurr1
+  - clip: {fileID: -8404250095460277587, guid: bbf069ce5bd1c4360ba1993ed2633bc1, type: 3}
+    name: CreatureRoar1
+  - clip: {fileID: -8404250095460277587, guid: 0d4b3aa2605184d2ca37daa0d83d7f22, type: 3}
+    name: Rain1
+  - clip: {fileID: -8404250095460277587, guid: c3ce4ac22ce844496866ad9499f57d48, type: 3}
+    name: RaininCar1
+  - clip: {fileID: -8404250095460277587, guid: 86299ffd493034c65bf4c255664bbed9, type: 3}
+    name: RainonUmbrella1
+  - clip: {fileID: -8404250095460277587, guid: c3967bad02b54413ca7668a203a329ab, type: 3}
+    name: Splash1
+  - clip: {fileID: -8404250095460277587, guid: 52f42d07956fb43c6a69c229047bd7f9, type: 3}
+    name: Thunder1
+  - clip: {fileID: -8404250095460277587, guid: 7930134f6551747dcb52d9d1ee74fddf, type: 3}
+    name: Thunder2
+  - clip: {fileID: -8404250095460277587, guid: 0aa9d325f040949238fe3e95649505e6, type: 3}
+    name: Book1
+  - clip: {fileID: -8404250095460277587, guid: 079721a2efb9b41559557cc7cfaf01f6, type: 3}
+    name: Book2
+  - clip: {fileID: -8404250095460277587, guid: 54fb76d2c037a4e29a0644454a80d039, type: 3}
+    name: Book3
+  - clip: {fileID: -8404250095460277587, guid: 4416df1735b754000b010148943fa8c8, type: 3}
+    name: Cash1
+  - clip: {fileID: -8404250095460277587, guid: 2f5e8b6a048334226a6f0e74aa86b882, type: 3}
+    name: Cash2
+  - clip: {fileID: -8404250095460277587, guid: 574ff42b380334a6eafcf5857b050cc2, type: 3}
+    name: CashRegister1
+  - clip: {fileID: -8404250095460277587, guid: 4c96effbae347483baac103413c85cc5, type: 3}
+    name: Coin1
+  - clip: {fileID: -8404250095460277587, guid: 28c21a0b5fca848f285ed713ce34a5b8, type: 3}
+    name: Coin2
+  - clip: {fileID: -8404250095460277587, guid: 54b8ec0fd166140138ef6eef0c341c4e, type: 3}
+    name: Coin3
+  - clip: {fileID: -8404250095460277587, guid: df6ba66827ad642daa95fb9bc020da9f, type: 3}
+    name: Coin4
+  - clip: {fileID: -8404250095460277587, guid: dd23a3cec55974f40b54e572b9630bcf, type: 3}
+    name: Coin5
+  - clip: {fileID: -8404250095460277587, guid: 03186835bb5cd4cee99ddc8a7e4ed5e2, type: 3}
+    name: Coin6
+  - clip: {fileID: -8404250095460277587, guid: e0ae0b66ec5c345169542bae58a3ec1d, type: 3}
+    name: DoorKnob1
+  - clip: {fileID: -8404250095460277587, guid: c1dd8d789ad424dac986575d2f0adfd0, type: 3}
+    name: Fan1
+  - clip: {fileID: -8404250095460277587, guid: 455ddac23d94f4d198bbb7f9deda4c13, type: 3}
+    name: Fan2
+  - clip: {fileID: -8404250095460277587, guid: e890f885b5de544d59ae4ab0664dcc8b, type: 3}
+    name: Fireplace1
+  - clip: {fileID: -8404250095460277587, guid: cf603b84d8a3b4d4995e404dd959ea6d, type: 3}
+    name: Fireplace2
+  - clip: {fileID: -8404250095460277587, guid: e722c40e0347f457dba2efdc21167c05, type: 3}
+    name: Flashlight1
+  - clip: {fileID: -8404250095460277587, guid: 5a896219e92d3432894a4720ceaa7267, type: 3}
+    name: Flashlight2
+  - clip: {fileID: -8404250095460277587, guid: 0e312d8dd618943ee80f2fe83e109cf6, type: 3}
+    name: Hammer1
+  - clip: {fileID: -8404250095460277587, guid: 30eb1e1837eea49088c39e2c60d19ebd, type: 3}
+    name: Hammer2
+  - clip: {fileID: -8404250095460277587, guid: e1a66bffe830248279920f18ff3a45c3, type: 3}
+    name: Hammer3
+  - clip: {fileID: -8404250095460277587, guid: 48b04cd1c7e6c45c99033fb83f30c75e, type: 3}
+    name: Keyboard1
+  - clip: {fileID: -8404250095460277587, guid: bb209fb0eab5d4f21b12d98cd39f91b0, type: 3}
+    name: Keyboard2
+  - clip: {fileID: -8404250095460277587, guid: c6f36653924a447c18e1cdbc2e14a822, type: 3}
+    name: Keyboard3
+  - clip: {fileID: -8404250095460277587, guid: 98451e6cac8844354b9c809764ce80ea, type: 3}
+    name: Keychain1
+  - clip: {fileID: -8404250095460277587, guid: 21aa582084c8e4125991f4cbf42a47f7, type: 3}
+    name: Keys1
+  - clip: {fileID: -8404250095460277587, guid: 2b230f5d89c034cebb5c6f0ca5e2673f, type: 3}
+    name: Pen1
+  - clip: {fileID: -8404250095460277587, guid: c748dc42d80304422ab1afd7d62f1e5d, type: 3}
+    name: SwitchHeavy1
+  - clip: {fileID: -8404250095460277587, guid: b5f90f292a1434ac6b261e7f3c05b4ec, type: 3}
+    name: SwitchHeavy2
+  - clip: {fileID: -8404250095460277587, guid: 5f4d0b24fdf7b450eab448ee8aaa61c1, type: 3}
+    name: SwitchLight1
+  - clip: {fileID: -8404250095460277587, guid: 1b723329471ef4d2cb72b3db472f7758, type: 3}
+    name: SwitchLight2
+  - clip: {fileID: -8404250095460277587, guid: 557773c989ca5454b90b6416bb012ee3, type: 3}
+    name: SwitchLight3
+  - clip: {fileID: -8404250095460277587, guid: c4c3b1884bce24d589784ec568ffc26a, type: 3}
+    name: SwitchMed1
+  - clip: {fileID: -8404250095460277587, guid: 60713e44d5aea4fc78d9a78943daff6d, type: 3}
+    name: SwitchMed2
+  - clip: {fileID: -8404250095460277587, guid: df2b0fd193fd843e2a71bf092b370cea, type: 3}
+    name: Velcro1
+  - clip: {fileID: -8404250095460277587, guid: 5b933023681254587ad2e0a101e62503, type: 3}
+    name: Velcro2
+  - clip: {fileID: -8404250095460277587, guid: 2190c21266fe04767ae3f89f379061b0, type: 3}
+    name: Woodsaw1
+  - clip: {fileID: -8404250095460277587, guid: 6a38398b21a2b492480d8d7465fff807, type: 3}
+    name: Woodsaw2
+  - clip: {fileID: -8404250095460277587, guid: dabfbfe7f3ea04cb7baa04527eb7892f, type: 3}
+    name: Woodsaw3
+  - clip: {fileID: -8404250095460277587, guid: 05308c4aa64da4ba2ab52866c1733bea, type: 3}
+    name: Boost1
+  - clip: {fileID: -8404250095460277587, guid: 699c16359745b45799bcd0733bf9d138, type: 3}
+    name: CarEngine1
+  - clip: {fileID: -8404250095460277587, guid: e6d33a698322947bba2f08602e361b37, type: 3}
+    name: CarEngine2
+  - clip: {fileID: -8404250095460277587, guid: c6a6f0a33d034415d8d9fb7447656551, type: 3}
+    name: CarScreech1
+  - clip: {fileID: -8404250095460277587, guid: 86eb5bb1ab5ce46cdb049f224abba5a0, type: 3}
+    name: CarScreech2
+  - clip: {fileID: -8404250095460277587, guid: 0f4b4b3adf571488ea5e1924897beae6, type: 3}
+    name: Crumbling1
+  - clip: {fileID: -8404250095460277587, guid: a23c1344c10a74aff8582e55078d35b8, type: 3}
+    name: IceCubes1
+  - clip: {fileID: -8404250095460277587, guid: 88ea752cd53264cdd8eb2ad769b8c19d, type: 3}
+    name: MovieProjector1
+  - clip: {fileID: -8404250095460277587, guid: 51438239b78e140d0aa04a97e8b073bb, type: 3}
+    name: BowRelease1
+  - clip: {fileID: -8404250095460277587, guid: 0ce7f6efc221b46b094abaf2f1536054, type: 3}
+    name: DistanceGunShot1
+  - clip: {fileID: -8404250095460277587, guid: 07da0761b3d1343e896f689ad2577eb9, type: 3}
+    name: DistanceGunShot2
+  - clip: {fileID: -8404250095460277587, guid: 3b9f0e66476e74586b74f17826e39294, type: 3}
+    name: DistanceGunShot3
+  - clip: {fileID: -8404250095460277587, guid: 1374cfa9612054293957a7b66d7f8488, type: 3}
+    name: HeavyMachineGunFire1
+  - clip: {fileID: -8404250095460277587, guid: 7072562f485c64f5382299fd1d1378e0, type: 3}
+    name: HeavyMachineGunFire2
+  - clip: {fileID: -8404250095460277587, guid: 06aafbf979b77400ba25f775e1d2ead9, type: 3}
+    name: HeavyMachineGunLoad1
+  - clip: {fileID: -8404250095460277587, guid: 38f9bd8468d1d45ffaf65e1fb6314f69, type: 3}
+    name: LightMachineGunFire1
+  - clip: {fileID: -8404250095460277587, guid: 43af5559b3ab34a388ebee466729f606, type: 3}
+    name: LightMachineGunLoad1
+  - clip: {fileID: -8404250095460277587, guid: d22e8270dde474957803199e71e64fb0, type: 3}
+    name: PistolFire1
+  - clip: {fileID: -8404250095460277587, guid: d03459874a5824152b9f05808a1955de, type: 3}
+    name: PistolFire2
+  - clip: {fileID: -8404250095460277587, guid: d757bd5e13ca64b2392045091e372177, type: 3}
+    name: PistolFire3
+  - clip: {fileID: -8404250095460277587, guid: 9f6ba142c954246868317548c7c93b42, type: 3}
+    name: PistolLoad1
+  - clip: {fileID: -8404250095460277587, guid: 69a217bbc5a4f46cf961eb14307123af, type: 3}
+    name: PistolLoad2
+  - clip: {fileID: -8404250095460277587, guid: a3b5426862ac8458fbde2bd74cc5ebe6, type: 3}
+    name: PistolLoad3
+  - clip: {fileID: -8404250095460277587, guid: 68139b13ff2fc4759a9c17d340afcb86, type: 3}
+    name: ScifiGunshot1
+  - clip: {fileID: -8404250095460277587, guid: 6dd37df61490f4beca8547a32139ef17, type: 3}
+    name: ShotgunFire1
+  - clip: {fileID: -8404250095460277587, guid: c1a7a4e32d30d4b6c9c73f61b7d22f47, type: 3}
+    name: ShotgunFire2
+  - clip: {fileID: -8404250095460277587, guid: d6fc63a0d606d42d5afa4d84d1bd63ec, type: 3}
+    name: ShotgunFire3
+  - clip: {fileID: -8404250095460277587, guid: 5527f1ddc0edb497cb8e914b23cad718, type: 3}
+    name: ShotgunLoad1
+  - clip: {fileID: -8404250095460277587, guid: 491852d310a6a4ebd8eadfe9e1eb5712, type: 3}
+    name: ShotgunLoad2
+  - clip: {fileID: -8404250095460277587, guid: 61d76871e56f24825b1ac8c96e72ea07, type: 3}
+    name: ShotgunLoad3
+  - clip: {fileID: -8404250095460277587, guid: 1ccced4156f904b4ab04ada67006bbeb, type: 3}
+    name: ShotgunShell1
+  - clip: {fileID: -8404250095460277587, guid: 454ff23bfc6f74a6e928276def6e6c3d, type: 3}
+    name: SniperFire1

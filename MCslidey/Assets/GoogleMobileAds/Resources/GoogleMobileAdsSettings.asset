@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoogleMobileAdsSettings
   m_EditorClassIdentifier: 
   isAdManagerEnabled: 0
-  isAdMobEnabled: 1
+  isAdMobEnabled: 0
   adMobAndroidAppId: ca-app-pub-8405254493226727~3675723182
-  adMobIOSAppId: 
+  adMobIOSAppId: ca-app-pub-8405254493226727~1234567890
   delayAppMeasurementInit: 1

@@ -1469,19 +1469,8 @@ namespace Models
 
         public static int UpdateLevelByScore(int score)
         {
-            for (var i = _levelData.data.Length - 1; i >= 0; --i)
-            {
-                if (score >= _levelData.data[i].score)
-                {
-                    CurLevel = _levelData.data[i].level;
-                    //                    if (_levelData.data[i].ice_1 != 0 || _levelData.data[i].ice_2 != 0 || _levelData.data[i].ice_3 != 0)
-                    //                    {
-                    //                        SetIceRandomRate(_levelData.data[i]);
-                    //                    }
-                    return CurLevel;
-                }
-            }
-
+            // 升级系统已禁用 - 永远保持等级1
+            CurLevel = 1;
             return CurLevel;
         }
 

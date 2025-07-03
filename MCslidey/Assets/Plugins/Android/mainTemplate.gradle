@@ -28,6 +28,8 @@ dependencies {
 
 // Android Resolver Exclusions Start
 android {
+	namespace "com.unity3d.player"
+	ndkPath "**NDKPATH**"
   packagingOptions {
       exclude ('/lib/armeabi/*' + '*')
       exclude ('/lib/mips/*' + '*')
@@ -62,6 +64,7 @@ android {
     }
 
     aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb'] + unityStreamingAssets.tokenize(', ')
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }**PACKAGING_OPTIONS**
 }**REPOSITORIES****SOURCE_BUILD_SETUP**

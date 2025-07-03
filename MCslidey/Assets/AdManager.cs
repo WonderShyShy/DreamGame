@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+#if ADMOB_ENABLED
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+#endif
 using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +13,7 @@ using UnityEngine.SceneManagement;
 public class AdManager : MonoBehaviour
 {
     [Header("Development Settings")]
-    public bool enableAds = false;  // 广告系统总开关
+    public bool enableAds = false;  // 广告系统总开关 - 已禁用倒计时看广告功能
     
     [Header("Admob Ad Units :")]
     string idBanner = "ca-app-pub-8405254493226727/5337408778";
@@ -29,9 +31,11 @@ public class AdManager : MonoBehaviour
    private bool interstitialAdEnabled = true;
    private bool rewardedAdEnabled = true;
 
+#if ADMOB_ENABLED
     [HideInInspector] public BannerView AdBanner;
     [HideInInspector] public InterstitialAd AdInterstitial;
     [HideInInspector] public RewardedAd AdReward;
+#endif
 
     public GameObject GDPR;
 
@@ -180,6 +184,17 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
+        // 检查iOS AdMob配置
+        #if UNITY_IOS && !UNITY_EDITOR
+        if (string.IsNullOrEmpty(GoogleMobileAds.GoogleMobileAdsSettings.Instance.AdMobIOSAppId))
+        {
+            Debug.LogWarning("iOS AdMob应用ID未配置，广告功能可能无法正常工作。请在Google Mobile Ads设置中配置iOS应用ID。");
+            _firstInit = false;
+            return;
+        }
+        #endif
+        
         RequestConfiguration requestConfiguration =
             new RequestConfiguration.Builder()
                 .SetTagForChildDirectedTreatment(TagForChildDirectedTreatment.Unspecified)
@@ -194,12 +209,18 @@ public class AdManager : MonoBehaviour
                 _firstInit = false;
             });
         });
+#else
+        Debug.Log("AdMob已禁用 - 跳过广告初始化");
+        _firstInit = false;
+#endif
     }
 
     private void OnDestroy()
     {
+#if ADMOB_ENABLED
         DestroyBannerAd();
         DestroyInterstitialAd();
+#endif
     }
 
     public void Destroy() => Destroy(gameObject);
@@ -208,12 +229,17 @@ public class AdManager : MonoBehaviour
     {
         if (!enableAds) return true;  // 广告关闭时模拟已加载
         
+#if ADMOB_ENABLED
         if (rewardedAdEnabled && AdReward != null && AdReward.IsLoaded())
             return true;
         else
             return false;
+#else
+        return true;  // AdMob禁用时模拟已加载
+#endif
     }
     
+#if ADMOB_ENABLED
     AdRequest CreateAdRequest()
     {
         return new AdRequest.Builder()
@@ -221,6 +247,7 @@ public class AdManager : MonoBehaviour
            .AddExtra("npa", PlayerPrefs.GetInt("npa", 1).ToString())
            .Build();
     }
+#endif
 
     #region Banner Ad ------------------------------------------------------------------------------
     public void ShowBanner()
@@ -231,6 +258,7 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
         if (!bannerAdEnabled) return;
 
         DestroyBannerAd();
@@ -238,6 +266,9 @@ public class AdManager : MonoBehaviour
         AdBanner = new BannerView(idBanner, AdSize.Banner, AdPosition.Bottom);
 
         AdBanner.LoadAd(CreateAdRequest());
+#else
+        Debug.Log("AdMob已禁用 - 跳过横幅广告");
+#endif
     }
     
     public void AdsButtonPressed()
@@ -262,8 +293,10 @@ public class AdManager : MonoBehaviour
 
     public void DestroyBannerAd()
     {
+#if ADMOB_ENABLED
         if (AdBanner != null)
             AdBanner.Destroy();
+#endif
     }
     #endregion
 
@@ -276,11 +309,15 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
         AdInterstitial = new InterstitialAd(idInterstitial);
 
         AdInterstitial.OnAdClosed += HandleInterstitialAdClosed;
 
         AdInterstitial.LoadAd(CreateAdRequest());
+#else
+        Debug.Log("AdMob已禁用 - 跳过插屏广告加载");
+#endif
     }
 
     public void ShowInterstitialAd()
@@ -297,28 +334,43 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
         if (!interstitialAdEnabled) return;
 
         if (AdInterstitial != null && AdInterstitial.IsLoaded())
         {
             AdInterstitial.Show();
         }
+#else
+        Debug.Log("AdMob已禁用 - 模拟插屏广告完成");
+        if (InteralADAction != null)
+        {
+            InteralADAction.Invoke();
+            InteralADAction = null;
+        }
+#endif
     }
     
     public bool IsInterstitialAdLoad()
     {
         if (!enableAds) return true;  // 广告关闭时模拟已加载
         
+#if ADMOB_ENABLED
         if (interstitialAdEnabled && AdInterstitial !=null && AdInterstitial.IsLoaded())
             return true;
         else
             return false;
+#else
+        return true;  // AdMob禁用时模拟已加载
+#endif
     }
 
     public void DestroyInterstitialAd()
     {
+#if ADMOB_ENABLED
         if (AdInterstitial != null)
             AdInterstitial.Destroy();
+#endif
     }
     #endregion
 
@@ -331,12 +383,16 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
         AdReward = new RewardedAd(idReward);
 
         AdReward.OnAdClosed += HandleOnRewardedAdClosed;
         AdReward.OnUserEarnedReward += HandleOnRewardedAdWatched;
 
         AdReward.LoadAd(CreateAdRequest());
+#else
+        Debug.Log("AdMob已禁用 - 跳过激励视频加载");
+#endif
     }   
     
    
@@ -354,6 +410,7 @@ public class AdManager : MonoBehaviour
             return;
         }
         
+#if ADMOB_ENABLED
         if (!rewardedAdEnabled) return;
 
         if (AdReward.IsLoaded())
@@ -363,6 +420,14 @@ public class AdManager : MonoBehaviour
             RequestRewardAd();
             ShowToast("Reward based video ad is not ready yet");
         }
+#else
+        Debug.Log("AdMob已禁用 - 模拟激励视频观看完成，直接给予奖励");
+        if (RewardAction != null)
+        {
+            RewardAction.Invoke();
+            RewardAction = null;
+        }
+#endif
     } 
     
 
@@ -370,12 +435,16 @@ public class AdManager : MonoBehaviour
     {
         if (!enableAds) return true;  // 广告关闭时模拟可以显示
         
+#if ADMOB_ENABLED
         if (AdReward.IsLoaded())
         {
             return true;
         }
 
         return false;
+#else
+        return true;  // AdMob禁用时模拟可以显示
+#endif
     }   
     
     
@@ -385,6 +454,7 @@ public class AdManager : MonoBehaviour
     
     public Action InteralADAction = null;
     
+#if ADMOB_ENABLED
     private void HandleInterstitialAdClosed(object sender, EventArgs e)
     {
         if (InteralADAction != null)
@@ -395,9 +465,11 @@ public class AdManager : MonoBehaviour
         DestroyInterstitialAd();
         RequestInterstitialAd();
     }
+#endif
 
     public Action RewardAction = null;
     
+#if ADMOB_ENABLED
     private void HandleOnRewardedAdClosed(object sender, EventArgs e)
     {
         RequestRewardAd();
@@ -412,5 +484,6 @@ public class AdManager : MonoBehaviour
 
         RewardAction = null;
     }
+#endif
     #endregion
 }
